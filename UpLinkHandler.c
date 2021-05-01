@@ -1,9 +1,9 @@
 /*
-* loraWANHandler.c
-*
-* Created: 12/04/2019 10:09:05
-*  Author: IHA
-*/
+ * UpLinkHandler.c
+ *
+ * Created: 28/04/2021 10.17.19
+ *  Author: maria
+ */ 
 #include <stddef.h>
 #include <stdio.h>
 
@@ -11,7 +11,7 @@
 
 #include <lora_driver.h>
 #include <status_leds.h>
-#include <hih8120.h>
+#include "SensorDataPackageHandler.h"
 
 // Parameters for OTAA join - You have got these in a mail from IHA
 #define LORA_appEUI "CC079E3308C9825F"
@@ -22,6 +22,7 @@ static char _out_buf[100];
 void lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _uplink_payload;
+
 
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 {
@@ -120,35 +121,17 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	_uplink_payload.len = 6;
-	_uplink_payload.portNo = 2;
 
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
+	
 	for(;;)
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		
-		float humi = hih8120_getHumidity();
-		float tem = hih8120_getTemperature();
-		uint16_t hum = humi;
-		int16_t temp = tem;
 
-
-		// Some dummy payload
-		//uint16_t hum = 12345; // Dummy humidity
-		//int16_t temp = 675; // Dummy temp
-		uint16_t co2_ppm = 1050; // Dummy CO2
-
-		_uplink_payload.bytes[0] = hum >> 8;
-		_uplink_payload.bytes[1] = hum & 0xFF;
-		_uplink_payload.bytes[2] = temp >> 8;
-		_uplink_payload.bytes[3] = temp & 0xFF;
-		_uplink_payload.bytes[4] = co2_ppm >> 8;
-		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
-
+		_uplink_payload = SensorDataPackageHandler_getLoRaPayload();
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 	}

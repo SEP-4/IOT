@@ -171,6 +171,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Application.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Application.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\display_7seg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -303,10 +309,25 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="LoRaWANHandler.c">
+    <Compile Include="hih8120.c">
       <SubType>compile</SubType>
     </Compile>
+    <None Include="LoRaWANHandler.c">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="main_exa.c">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SensorDataPackageHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SensorDataPackageHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UpLinkHandler.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

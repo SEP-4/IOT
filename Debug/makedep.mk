@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Application.c
+
 FreeRTOS\src\croutine.c
 
 FreeRTOS\src\event_groups.c
@@ -22,7 +24,11 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
-LoRaWANHandler.c
+hih8120.c
 
 main.c
+
+SensorDataPackageHandler.c
+
+UpLinkHandler.c
 
