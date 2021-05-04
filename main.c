@@ -17,7 +17,7 @@
 // Needed for LoRaWAN
 #include <lora_driver.h>
 #include <status_leds.h>
-#include <Application.h>
+#include "Application.h"
 
 /*-----------------------------------------------------------*/
 int main(void)

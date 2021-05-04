@@ -21,21 +21,17 @@ int16_t tempIn16 = 0.0;
 uint16_t co2_ppmIn16 = 0.0;
 static lora_driver_payload_t _uplink_payload;
 
-void SensorDataPackageHandler_SetTemperatureAndHumidity( float humdata, float tempdata){
-	humIn16 = humdata;
-	tempIn16 = tempdata;
-	printf("this is hum %f", humdata);
-	printf("this is tem %f", tempdata);
-}
 void SensorDataPackageHandler_SetCO2(uint16_t co2){
 	co2_ppmIn16 = co2;
 }
 
 lora_driver_payload_t SensorDataPackageHandler_getLoRaPayload(){
-	float hum = hih8120_getHumidity();
-	float tem = hih8120_getTemperature();
-	SensorDataPackageHandler_SetTemperatureAndHumidity(tem,hum);
+	humIn16 = hih8120_getHumidityPercent_x10();
+	tempIn16 = hih8120_getTemperature_x10();
 	
+	printf("STARTED");
+	printf("and this is the changed hum %u\n", humIn16);
+	printf("and also the changed temp %u\n", tempIn16);
 	
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
