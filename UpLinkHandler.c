@@ -130,7 +130,7 @@ void lora_handler_task( void *pvParameters )
 	for(;;)
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-
+		printf("startLoraTask");
 		_uplink_payload = SensorDataPackageHandler_getLoRaPayload();
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));

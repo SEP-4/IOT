@@ -16,6 +16,7 @@
 #include <lora_driver.h>
 #include <status_leds.h>
 
-void SensorDataPackageHandler_SetTemperatureAndHumidity(float tempdata, float humdata);
+void SensorDataPackageHandler_SetHumidity(uint16_t humidity);
+void SensorDataPackageHandler_SetTemperature(int16_t temperature);
 void SensorDataPackageHandler_SetCO2(uint16_t co2);
 lora_driver_payload_t SensorDataPackageHandler_getLoRaPayload();

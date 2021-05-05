@@ -25,13 +25,19 @@ void SensorDataPackageHandler_SetCO2(uint16_t co2){
 	co2_ppmIn16 = co2;
 }
 
+void SensorDataPackageHandler_SetHumidity(uint16_t humidity){
+	humIn16 = humidity;
+}
+
+void SensorDataPackageHandler_SetTemperature(int16_t temperature){
+	tempIn16 = temperature;
+}
+
 lora_driver_payload_t SensorDataPackageHandler_getLoRaPayload(){
-	humIn16 = hih8120_getHumidityPercent_x10();
-	tempIn16 = hih8120_getTemperature_x10();
-	
-	printf("STARTED");
+	printf("STARTEDSensorDataPackageHandler");
 	printf("and this is the changed hum %u\n", humIn16);
 	printf("and also the changed temp %u\n", tempIn16);
+	printf("and also the changed CO2 %u\n", co2_ppmIn16);
 	
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;

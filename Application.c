@@ -17,28 +17,131 @@
 // Needed for LoRaWAN
 #include <lora_driver.h>
 #include <status_leds.h>
+
 #include "Application.h"
 #include <hih8120.h>
+#include "hih8120_2.h"
+#include <event_groups.h>
+#include "CO2Sensor.h"
 
-// Prototype for LoRaWAN handler
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
-// Prototype for hih8120 handler
-void hih8120_handler_initialise(UBaseType_t hih8120_handler_task_priority);
+#define BIT_0	( 1 << 0 )
+#define BIT_4	( 1 << 4 )
+
+
+// Declare a variable to hold the created event group.
+EventGroupHandle_t xCreatedEventGroup;
+
+EventGroupHandle_t Application_getEventGroup(){
+	return xCreatedEventGroup;
+}
+
+void aFunctionToWaitBits( EventGroupHandle_t xEventGroup )
+{
+EventBits_t uxBits;
+const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
+
+  /* Wait a maximum of 100ms for either bit 0 or bit 4 to be set within
+  the event group.  Clear the bits before exiting. */
+  uxBits = xEventGroupWaitBits(
+            xEventGroup,   /* The event group being tested. */
+            BIT_0 | BIT_4, /* The bits within the event group to wait for. */
+            pdFALSE,        /* BIT_0 & BIT_4 should not be cleared before returning. */
+            pdTRUE,       /* Wait for both bits, either bit will do. */
+            xTicksToWait );/* Wait a maximum of 100ms for either bit to be set. */
+
+  if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+  {
+      /* xEventGroupWaitBits() returned because both bits were set. */
+	  printf("setting the bits, they are set");
+	  SensorDataPackageHandler_SetHumidity(hih820_getHumidityInUint16());
+	  SensorDataPackageHandler_SetTemperature(hih820_getTemperatureInUint16());
+	  SensorDataPackageHandler_SetCO2(CO2_getCO2InUint16());
+	  aFunctionToClearBits( xEventGroup );
+  }
+  else if( ( uxBits & BIT_0 ) != 0 )
+  {
+      /* xEventGroupWaitBits() returned because just BIT_0 was set. */
+  }
+  else if( ( uxBits & BIT_4 ) != 0 )
+  {
+      /* xEventGroupWaitBits() returned because just BIT_4 was set. */
+  }
+  else
+  {
+      /* xEventGroupWaitBits() returned because xTicksToWait ticks passed
+      without either BIT_0 or BIT_4 becoming set. */
+  }
+}
+
+void aFunctionToClearBits( EventGroupHandle_t xEventGroup )
+{
+EventBits_t uxBits;
+
+  /* Clear bit 0 and bit 4 in xEventGroup. */
+  uxBits = xEventGroupClearBits(
+                                xEventGroup,  /* The event group being updated. */
+                                BIT_0 | BIT_4 );/* The bits being cleared. */
+
+  if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+  {
+      /* Both bit 0 and bit 4 were set before xEventGroupClearBits()
+      was called.  Both will now be clear (not set). */
+  }
+  else if( ( uxBits & BIT_0 ) != 0 )
+  {
+      /* Bit 0 was set before xEventGroupClearBits() was called.  It will
+      now be clear. */
+  }
+  else if( ( uxBits & BIT_4 ) != 0 )
+  {
+      /* Bit 4 was set before xEventGroupClearBits() was called.  It will
+      now be clear. */
+  }
+  else
+  {
+      /* Neither bit 0 nor bit 4 were set in the first place. */
+  }
+}
 
 
 /*-----------------------------------------------------------*/
-void Application_initialiseSystem()
-{
-	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
-	stdio_initialise(ser_USART0);
 
-	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-	// Status Leds driver
-	status_leds_initialise(5); // Priority 5 for internal task
-	// Initialise the LoRaWAN driver without down-link buffer
-	lora_driver_initialise(1, NULL);
-	// Create LoRaWAN task and start it up with priority 3
-	lora_handler_initialise(3);
-	//Create humidity temperature task and start with priority 4
-	hih8120_handler_initialise(4);
+static char _out_buf[100];
+
+void Application_handler_task( void *pvParameters );
+
+void Application_handler_initialise(UBaseType_t Application_task_priority){
+	xTaskCreate(
+	Application_handler_task
+	,  "ApplicationHand"  // A name just for humans
+	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	,  NULL
+	,  Application_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  NULL );
+}
+
+void Application_handler_task(void *pvParameters)
+{
+	printf("startApplication");
+	(void)pvParameters;
+	xCreatedEventGroup = xEventGroupCreate();
+	
+	TickType_t xLastWakeTime;
+	const TickType_t xFrequency = pdMS_TO_TICKS(300UL); // Upload message every 1 minutes (300 ms)
+	xLastWakeTime = xTaskGetTickCount();
+	
+	for(;;)
+	{
+		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+		// Was the event group created successfully?
+		if( xCreatedEventGroup == NULL )
+		{
+		// The event group was not created because there was insufficient
+		// FreeRTOS heap available.
+		}
+		else
+		{
+			aFunctionToWaitBits( xCreatedEventGroup);
+		}
+	}
 }

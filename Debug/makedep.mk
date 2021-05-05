@@ -4,6 +4,8 @@
 
 Application.c
 
+CO2Sensor.c
+
 FreeRTOS\src\croutine.c
 
 FreeRTOS\src\event_groups.c
