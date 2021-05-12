@@ -20,12 +20,18 @@
 #include "Application.h"
 #include <hih8120.h>
 #include "hih8120_2.h"
+#include <rc_servo.h>
+#include <message_buffer.h>
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
 
-// Prototype for LoRaWAN handler
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+MessageBufferHandle_t downLinkMessageBufferHandle;
+
+// Prototype for LoRaWAN handler without down link buffer
+void UpLinkHandler_lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+// Prototype for LoRaWan handler with down link buffer
+void DownLinkHandler_lora_handler_initialise(UBaseType_t DownLinkHandler_lora_handler_task_priority, MessageBufferHandle_t downLinkMessageBufferHandle);
 // Prototype for hih8120 handler
 void hih8120_handler_initialise(UBaseType_t hih8120_handler_task_priority);
 // Prototype for Application handler
@@ -65,11 +71,15 @@ int main(void)
 	CO2Sensor_handler_initialise(4);
 	//Create humidity temperature task and start with priority 3
 	hih8120_handler_initialise(3);
-	// Initialise the LoRaWAN driver without down-link buffer
-	lora_driver_initialise(1, NULL);
+	//initialize rc_servo
+	rc_servo_initialise();
+	// Initialise the LoRaWAN driver with down-link buffer
+	downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
+	lora_driver_initialise(1, downLinkMessageBufferHandle);
 	// Create LoRaWAN task and start it up with priority 2
-	lora_handler_initialise(2);
-	
+	UpLinkHandler_lora_handler_initialise(2);
+	//Create LoRaWAN task and start with priority 1
+	DownLinkHandler_lora_handler_initialise(1,downLinkMessageBufferHandle);
 	
 	printf("Program Started!!\n");
 	vTaskStartScheduler(); // Initialize and run the freeRTOS scheduler. Execution should never return from here.

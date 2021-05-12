@@ -12,6 +12,7 @@
 #include <lora_driver.h>
 #include <status_leds.h>
 #include "SensorDataPackageHandler.h"
+#include <message_buffer.h>
 
 // Parameters for OTAA join - You have got these in a mail from IHA
 #define LORA_appEUI "CC079E3308C9825F"
@@ -19,19 +20,19 @@
 
 static char _out_buf[100];
 
-void lora_handler_task( void *pvParameters );
+void UpLinkHandler_lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _uplink_payload;
 
 
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
+void UpLinkHandler_lora_handler_initialise(UBaseType_t UpLinkHandler_lora_handler_task_priority)
 {
 	xTaskCreate(
-	lora_handler_task
+	UpLinkHandler_lora_handler_task
 	,  "LRHand"  // A name just for humans
 	,  configMINIMAL_STACK_SIZE+200  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
-	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  UpLinkHandler_lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
 
@@ -108,7 +109,7 @@ static void _lora_setup(void)
 }
 
 /*-----------------------------------------------------------*/
-void lora_handler_task( void *pvParameters )
+void UpLinkHandler_lora_handler_task( void *pvParameters )
 {
 	// Hardware reset of LoRaWAN transceiver
 	lora_driver_resetRn2483(1);

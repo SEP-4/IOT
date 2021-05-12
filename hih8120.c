@@ -18,7 +18,6 @@
 uint16_t humidityIn16 = 0;
 int16_t temperatureIn16 = 0;
 
-static char _out_buf[100];
 
 void hih820_handler_task( void *pvParameters );
 
@@ -59,7 +58,7 @@ void hih820_handler_task(void *pvParameters)
 				humidityIn16 = hih8120_getHumidityPercent_x10();
 				temperatureIn16 = hih8120_getTemperature_x10();
 				printf("Arrived here");
-				aFunctionToSetBits(Application_getEventGroup());
+				hih820_aFunctionToSetBits(Application_getEventGroup());
 			}
 		}
 	}
@@ -75,7 +74,7 @@ int16_t hih820_getTemperatureInUint16(){
 
 #define BIT_4	( 1 << 4 )
 
-void aFunctionToSetBits( EventGroupHandle_t xEventGroup )
+void hih820_aFunctionToSetBits( EventGroupHandle_t xEventGroup )
 {
 EventBits_t uxBits;
 

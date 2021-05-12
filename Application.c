@@ -35,7 +35,7 @@ EventGroupHandle_t Application_getEventGroup(){
 	return xCreatedEventGroup;
 }
 
-void aFunctionToWaitBits( EventGroupHandle_t xEventGroup )
+void Application_aFunctionToWaitBits( EventGroupHandle_t xEventGroup )
 {
 EventBits_t uxBits;
 const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
@@ -55,8 +55,8 @@ const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
 	  printf("setting the bits, they are set");
 	  SensorDataPackageHandler_SetHumidity(hih820_getHumidityInUint16());
 	  SensorDataPackageHandler_SetTemperature(hih820_getTemperatureInUint16());
-	  SensorDataPackageHandler_SetCO2(CO2_getCO2InUint16());
-	  aFunctionToClearBits( xEventGroup );
+	  SensorDataPackageHandler_SetCO2(CO2Sensor_getCO2InUint16());
+	  Application_aFunctionToClearBits( xEventGroup );
   }
   else if( ( uxBits & BIT_0 ) != 0 )
   {
@@ -73,7 +73,7 @@ const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
   }
 }
 
-void aFunctionToClearBits( EventGroupHandle_t xEventGroup )
+void Application_aFunctionToClearBits( EventGroupHandle_t xEventGroup )
 {
 EventBits_t uxBits;
 
@@ -141,7 +141,7 @@ void Application_handler_task(void *pvParameters)
 		}
 		else
 		{
-			aFunctionToWaitBits( xCreatedEventGroup);
+			Application_aFunctionToWaitBits( xCreatedEventGroup);
 		}
 	}
 }

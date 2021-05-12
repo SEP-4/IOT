@@ -18,7 +18,6 @@ uint16_t CO2ppm;
 mh_z19_returnCode_t rc;
 mh_z19_returnCode_t getCO2return;
 
-static char _out_buf[100];
 
 void CO2Sensor_handler_task( void *pvParameters );
 
@@ -52,7 +51,7 @@ void CO2Sensor_handler_task(void *pvParameters)
 			vTaskDelay(50);
 			if(getCO2return == MHZ19_OK){
 				getCO2return = mh_z19_getCo2Ppm(&CO2ppm);
-				CO2_aFunctionToSetBits(Application_getEventGroup());
+				CO2Sensor_aFunctionToSetBits(Application_getEventGroup());
 			}
 			else if(getCO2return == MHZ19_NO_MEASSURING_AVAILABLE){
 				printf("Didn't get the measurements");
@@ -62,14 +61,14 @@ void CO2Sensor_handler_task(void *pvParameters)
 }
 
 
-uint16_t CO2_getCO2InUint16(){
+uint16_t CO2Sensor_getCO2InUint16(){
 	return CO2ppm;
 }
 
 
 #define BIT_0	( 1 << 0 )
 
-void CO2_aFunctionToSetBits( EventGroupHandle_t xEventGroup )
+void CO2Sensor_aFunctionToSetBits( EventGroupHandle_t xEventGroup )
 {
 EventBits_t uxBits;
 

@@ -6,6 +6,10 @@ Application.c
 
 CO2Sensor.c
 
+Configuration.c
+
+DownLinkHandler.c
+
 FreeRTOS\src\croutine.c
 
 FreeRTOS\src\event_groups.c
@@ -27,6 +31,8 @@ FreeRTOS\src\timers.c
 FreeRTOS\src\variantHooks.c
 
 hih8120.c
+
+WindowController.c
 
 main.c
 

@@ -6,4 +6,4 @@
  */ 
 #pragma once
 
-uint16_t CO2_getCO2InUint16();
+uint16_t CO2Sensor_getCO2InUint16();
