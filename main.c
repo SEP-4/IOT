@@ -62,7 +62,7 @@ int main(void)
 	// Create LoRaWAN task and start it up with priority 2
 	UpLinkHandler_lora_handler_initialise(2);
 	//Create LoRaWAN task and start with priority 1
-	//DownLinkHandler_lora_handler_initialise(1,downLinkMessageBufferHandle);
+	DownLinkHandler_lora_handler_initialise(1,downLinkMessageBufferHandle);
 	//Create Configuration for Downlink_handler and WindowController
 	
 	printf("Program Started!!\n");

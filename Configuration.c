@@ -4,19 +4,28 @@
  * Created: 05/05/2021 22.48.07
  *  Author: maria
  */
-/*
+
 #include "Configuration.h"
-#include <stdio.h>
+
 #include <stdbool.h>
+#include <ATMEGA_FreeRTOS.h>
+#include <stdio.h>
+#include <avr/io.h>
+#include <avr/sfr_defs.h>
+
+#include <ATMEGA_FreeRTOS.h>
+#include <semphr.h>
+
+#include <FreeRTOSTraceDriver.h>
+#include <stdio_driver.h>
+#include <serial.h>
  
-SemaphoreHandle_t _configurationMutex = NULL;
-static bool state;
+SemaphoreHandle_t _configurationMutex = NULL; 
 uint16_t windows_settings;
 
 void configuration_create(){
 	//Initialize Semaphore 
 	create_semaphores();
-	state = true;
 }
 
 
@@ -29,16 +38,15 @@ void configuration_set_windows_data(uint16_t value){
 }
 
 bool configuration_take(){
-	if(state){
-		state = false;
+	if(xSemaphoreTake(_configurationMutex, portMAX_DELAY)){
 		return true;
 	}else{
-		return state;
+		return false;
 	}
 }
 
 void configuration_give(){
-	state = true;
+	xSemaphoreGive(_configurationMutex);
 }
 
 void create_semaphores(void)
@@ -51,9 +59,9 @@ void create_semaphores(void)
 		_configurationMutex = xSemaphoreCreateMutex();  // Create a mutex semaphore.
 		if ( ( _configurationMutex ) != NULL )
 		{
-			xSemaphoreGive( ( xTestSemaphore ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
+			xSemaphoreGive( ( _configurationMutex ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
 		}
 	}
-}*/
+}
 
 

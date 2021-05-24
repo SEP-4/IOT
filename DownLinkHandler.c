@@ -6,6 +6,7 @@
  */ 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include <ATMEGA_FreeRTOS.h>
 
@@ -42,6 +43,7 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Download message every 5 minutes (300000 ms)
 	const TickType_t xConfigurationDelay = pdMS_TO_TICKS(50000);
 	xLastWakeTime = xTaskGetTickCount();
+	configuration_create();
 	
 	for(;;)
 	{
@@ -56,13 +58,13 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 			windowDataSetting = (_downlink_payload.bytes[0] << 8) + _downlink_payload.bytes[1];
 			maxTempSetting = (_downlink_payload.bytes[2] << 8) + _downlink_payload.bytes[3];
 			for(;;){
-				/*
-				if(configuraiton_take()){
+				if(true == configuraiton_take()){
 					configuration_set_windows_data(windowDataSetting);
+					configuration_give();
 					break;
 				}else{
 					xTaskDelayUntil(&xLastWakeTime, xConfigurationDelay);
-				}*/
+				}
 			}
 		}
 	}
