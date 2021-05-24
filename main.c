@@ -25,7 +25,7 @@
 
 // define semaphore handle
 
-MessageBufferHandle_t downLinkMessageBufferHandle;
+MessageBufferHandle_t downLinkMessageBufferHandle = NULL;
 
 
 // Prototype for LoRaWAN handler without down link buffer
@@ -57,12 +57,12 @@ int main(void)
 	//initialize rc_servo
 	//rc_servo_initialise();
 	// Initialise the LoRaWAN driver with down-link buffer
-	downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
+	//downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
 	lora_driver_initialise(1, NULL);
 	// Create LoRaWAN task and start it up with priority 2
 	UpLinkHandler_lora_handler_initialise(2);
 	//Create LoRaWAN task and start with priority 1
-	DownLinkHandler_lora_handler_initialise(1,downLinkMessageBufferHandle);
+	//DownLinkHandler_lora_handler_initialise(1,downLinkMessageBufferHandle);
 	//Create Configuration for Downlink_handler and WindowController
 	
 	printf("Program Started!!\n");

@@ -18,7 +18,7 @@
 void DownLinkHandler_lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _downlink_payload;
-uint16_t windowDataSetting; // Max Humidity
+uint16_t windowDataSetting; // Windows Data setting
 int16_t maxTempSetting; // Max Temperature
 MessageBufferHandle_t _downLinkMessageBufferHandle;
 
@@ -38,12 +38,13 @@ void DownLinkHandler_lora_handler_initialise(UBaseType_t DownLinkHandler_lora_ha
 
 void DownLinkHandler_lora_handler_task( void *pvParameters )
 {
-	
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Download message every 5 minutes (300000 ms)
 	const TickType_t xConfigurationDelay = pdMS_TO_TICKS(50000);
 	xLastWakeTime = xTaskGetTickCount();
 	configuration_create();
+	SemaphoreHandle_t semaphore_mutex = get_mutex();
+	xSemaphoreGive(semaphore_mutex);
 	
 	for(;;)
 	{
@@ -56,11 +57,13 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 		{
 			// decode the payload into our variables
 			windowDataSetting = (_downlink_payload.bytes[0] << 8) + _downlink_payload.bytes[1];
+			printf(windowDataSetting + " Hex code");
 			maxTempSetting = (_downlink_payload.bytes[2] << 8) + _downlink_payload.bytes[3];
+			printf(maxTempSetting + " Hex code 2");
 			for(;;){
-				if(true == configuraiton_take()){
+				if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
 					configuration_set_windows_data(windowDataSetting);
-					configuration_give();
+					xSemaphoreGive(semaphore_mutex);
 					break;
 				}else{
 					xTaskDelayUntil(&xLastWakeTime, xConfigurationDelay);

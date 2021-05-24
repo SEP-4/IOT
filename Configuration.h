@@ -21,5 +21,4 @@
 void configuration_create();
 uint16_t configuration_get_windows_data();
 void configuration_set_windows_data(uint16_t value);
-bool configuraiton_take();
-void configuration_give();
+SemaphoreHandle_t get_mutex();

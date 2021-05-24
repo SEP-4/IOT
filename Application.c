@@ -130,6 +130,7 @@ void Application_handler_task(void *pvParameters)
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300UL); // Upload message every 1 minutes (300 ms)
 	xLastWakeTime = xTaskGetTickCount();
+	SemaphoreHandle_t semaphore_mutex = get_mutex();
 	
 	for(;;)
 	{

@@ -33,18 +33,23 @@ void WindowController_handler_task(void *pvParameters)
 	
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(100000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency_2 = pdMS_TO_TICKS(50000UL); //Retry if flag is set
 	bool flag = false;
 	uint16_t windows_data_setting = NULL;
 	xLastWakeTime = xTaskGetTickCount();
 	rc_servo_setPosition(-100, percent);
+	SemaphoreHandle_t semaphore_mutex = get_mutex();
 	for(;;)
 	{
-		/*
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		if(configuraiton_take()){
+		if(flag){
+			xTaskDelayUntil( &xLastWakeTime, xFrequency );
+		}else{
+			xTaskDelayUntil( &xLastWakeTime, xFrequency_2 );
+		}
+		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
 			windows_data_setting = configuration_get_windows_data();
 			if(flag){
-				xFrequency = pdMS_TO_TICKS(100000UL);
+				flag = false;
 			}
 			if(windows_data_setting < 50){
 				rc_servo_setPosition(100, percent);
@@ -52,8 +57,7 @@ void WindowController_handler_task(void *pvParameters)
 				rc_servo_setPosition(-100, percent);
 			}
 		}else{
-			xFrequency = pdMS_TO_TICKS(50000UL);
 			flag = true;
-		}*/
+		}
 	}
 }
