@@ -27,7 +27,7 @@ CO2Sensor.d CO2Sensor.o: .././CO2Sensor.c ../drivers/mh_z19.h \
  ../drivers/status_leds.h .././Application.h ../FreeRTOS/src/task.h \
  ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
  ../drivers/stdio_driver.h ../FreeRTOS/src/event_groups.h \
- ../FreeRTOS/src/timers.h
+ ../FreeRTOS/src/timers.h .././CO2Sensor.h
 
 ../drivers/mh_z19.h:
 
@@ -110,3 +110,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../FreeRTOS/src/event_groups.h:
 
 ../FreeRTOS/src/timers.h:
+
+.././CO2Sensor.h:

@@ -5,6 +5,7 @@
  * Created: 15/05/2021 15.19.43
  *  Author: Jannik
  */ 
+#pragma once
 #include <stdbool.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <stdio.h>

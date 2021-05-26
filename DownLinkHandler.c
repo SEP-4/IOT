@@ -38,17 +38,18 @@ void DownLinkHandler_lora_handler_initialise(UBaseType_t DownLinkHandler_lora_ha
 
 void DownLinkHandler_lora_handler_task( void *pvParameters )
 {
-	TickType_t xLastWakeTime;
+	/*TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Download message every 5 minutes (300000 ms)
 	const TickType_t xConfigurationDelay = pdMS_TO_TICKS(50000);
 	xLastWakeTime = xTaskGetTickCount();
+	*/
 	configuration_create();
 	SemaphoreHandle_t semaphore_mutex = get_mutex();
 	xSemaphoreGive(semaphore_mutex);
 	
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+		//xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		printf("startLoraDownlinkTask\n");
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
@@ -57,16 +58,16 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 		{
 			// decode the payload into our variables
 			windowDataSetting = (_downlink_payload.bytes[0] << 8) + _downlink_payload.bytes[1];
-			printf(windowDataSetting + " Hex code");
+			//printf(windowDataSetting + " Hex code");
 			maxTempSetting = (_downlink_payload.bytes[2] << 8) + _downlink_payload.bytes[3];
-			printf(maxTempSetting + " Hex code 2");
+			printf("%d Hex code 2", maxTempSetting);
 			for(;;){
 				if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
 					configuration_set_windows_data(windowDataSetting);
 					xSemaphoreGive(semaphore_mutex);
 					break;
 				}else{
-					xTaskDelayUntil(&xLastWakeTime, xConfigurationDelay);
+					//xTaskDelayUntil(&xLastWakeTime, xConfigurationDelay);
 				}
 			}
 		}

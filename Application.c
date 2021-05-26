@@ -23,6 +23,7 @@
 #include "hih8120_2.h"
 #include <event_groups.h>
 #include "CO2Sensor.h"
+#include "SensorDataPackageHandler.h"
 
 #define BIT_0	( 1 << 0 )
 #define BIT_4	( 1 << 4 )
@@ -57,7 +58,7 @@ const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
 	  SensorDataPackageHandler_SetHumidity(hih820_getHumidityInUint16());
 	  SensorDataPackageHandler_SetTemperature(hih820_getTemperatureInUint16());
 	  SensorDataPackageHandler_SetCO2(CO2Sensor_getCO2InUint16());
-	  Application_aFunctionToClearBits( xEventGroup );
+	  Application_aFunctionToClearBits(xEventGroup);
   }
   else if( ( uxBits & BIT_0 ) != 0 )
   {
@@ -107,8 +108,6 @@ EventBits_t uxBits;
 
 /*-----------------------------------------------------------*/
 
-static char _out_buf[100];
-
 void Application_handler_task( void *pvParameters );
 
 void Application_handler_initialise(UBaseType_t Application_task_priority){
@@ -130,7 +129,7 @@ void Application_handler_task(void *pvParameters)
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300UL); // Upload message every 1 minutes (300 ms)
 	xLastWakeTime = xTaskGetTickCount();
-	SemaphoreHandle_t semaphore_mutex = get_mutex();
+	//SemaphoreHandle_t semaphore_mutex = get_mutex();
 	
 	for(;;)
 	{

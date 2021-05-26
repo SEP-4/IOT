@@ -24,8 +24,17 @@ SemaphoreHandle_t _configurationSemaphore  = NULL;
 uint16_t windows_settings;
 
 void configuration_create(){
-	//Initialize Semaphore 
-	create_semaphores();
+	// Semaphores are useful to stop a Task proceeding, where it should be paused to wait,
+	// because it is sharing a resource, such as the Serial port.
+	// Semaphores should only be used whilst the scheduler is running, but we can set it up here.
+	if ( _configurationSemaphore  == NULL )  // Check to confirm that the Semaphore has not already been created.
+	{
+		_configurationSemaphore = xSemaphoreCreateBinary();  // Create a binary Mutex semaphore.
+		if ( ( _configurationSemaphore  ) != NULL )
+		{
+			xSemaphoreGive( ( _configurationSemaphore  ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
+		}
+	}
 }
 
 
@@ -39,21 +48,6 @@ void configuration_set_windows_data(uint16_t value){
 
 SemaphoreHandle_t get_mutex(){
 	return _configurationSemaphore ;
-}
-
-void create_semaphores(void)
-{
-	// Semaphores are useful to stop a Task proceeding, where it should be paused to wait,
-	// because it is sharing a resource, such as the Serial port.
-	// Semaphores should only be used whilst the scheduler is running, but we can set it up here.
-	if ( _configurationSemaphore  == NULL )  // Check to confirm that the Semaphore has not already been created.
-	{
-		_configurationSemaphore = xSemaphoreCreateBinary();  // Create a binary Mutex semaphore.
-		if ( ( _configurationSemaphore  ) != NULL )
-		{
-			xSemaphoreGive( ( _configurationSemaphore  ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
-		}
-	}
 }
 
 

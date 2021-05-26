@@ -26,7 +26,8 @@ Application.d Application.o: .././Application.c \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
  ../drivers/status_leds.h .././Application.h \
  ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
- ../drivers/hih8120.h .././hih8120_2.h .././CO2Sensor.h
+ ../drivers/hih8120.h .././hih8120_2.h .././CO2Sensor.h \
+ .././SensorDataPackageHandler.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -109,3 +110,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 .././hih8120_2.h:
 
 .././CO2Sensor.h:
+
+.././SensorDataPackageHandler.h:

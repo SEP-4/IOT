@@ -19,9 +19,11 @@
 #include <status_leds.h>
 #include "Application.h"
 #include <hih8120.h>
+#include <mh_z19.h>
 #include "hih8120_2.h"
 #include <rc_servo.h>
 #include <message_buffer.h>
+#include  "CO2Sensor.h"
 
 // define semaphore handle
 
@@ -47,7 +49,7 @@ int main(void)
 	// Status Leds driver
 	status_leds_initialise(6); // Priority 5 for internal task
 	//Initialize Application
-	Application_handler_initialise(5);
+	//Application_handler_initialise(5);
 	//initialize CO2Sensor
 	mh_z19_initialise(ser_USART3);
 	//create CO2 task
@@ -58,7 +60,7 @@ int main(void)
 	//rc_servo_initialise();
 	// Initialise the LoRaWAN driver with down-link buffer
 	//downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
-	lora_driver_initialise(1, NULL);
+	lora_driver_initialise(2, downLinkMessageBufferHandle);
 	// Create LoRaWAN task and start it up with priority 2
 	UpLinkHandler_lora_handler_initialise(2);
 	//Create LoRaWAN task and start with priority 1
