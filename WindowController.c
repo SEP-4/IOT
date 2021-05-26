@@ -9,7 +9,6 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <rc_servo.h>
 
-static char _out_buf[100];
 int8_t percent = 0;
 
 void WindowController_handler_task( void *pvParameters );

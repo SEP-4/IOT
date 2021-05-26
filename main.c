@@ -22,6 +22,8 @@
 #include "hih8120_2.h"
 #include <rc_servo.h>
 #include <message_buffer.h>
+#include <mh_z19.h>
+#include "CO2Sensor.h"
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;

@@ -23,6 +23,7 @@
 #include "hih8120_2.h"
 #include <event_groups.h>
 #include "CO2Sensor.h"
+#include "SensorDataPackageHandler.h"
 
 #define BIT_0	( 1 << 0 )
 #define BIT_4	( 1 << 4 )
@@ -105,8 +106,6 @@ EventBits_t uxBits;
 
 
 /*-----------------------------------------------------------*/
-
-static char _out_buf[100];
 
 void Application_handler_task( void *pvParameters );
 

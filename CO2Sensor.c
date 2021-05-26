@@ -12,6 +12,7 @@
 #include "Application.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <event_groups.h>
+#include "CO2Sensor.h"
 
 
 uint16_t CO2ppm;

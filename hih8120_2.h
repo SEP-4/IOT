@@ -6,6 +6,8 @@
  */ 
 
 #pragma once
+#include <event_groups.h>
 
 uint16_t hih820_getHumidityInUint16();
 int16_t hih820_getTemperatureInUint16();
+void hih820_aFunctionToSetBits( EventGroupHandle_t xEventGroup );

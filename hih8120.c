@@ -23,7 +23,7 @@ void hih820_handler_task( void *pvParameters );
 
 void hih8120_handler_initialise(UBaseType_t hih8120_task_priority){
 	if ( HIH8120_OK == hih8120_initialise() ){
-			printf(HIH8120_OK);
+			printf("%d\n",HIH8120_OK);
 	}
 	xTaskCreate(
 	hih820_handler_task

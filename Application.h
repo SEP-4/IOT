@@ -23,3 +23,4 @@
 
 void Application_initialiseSystem();
 EventGroupHandle_t Application_getEventGroup();
+void Application_aFunctionToClearBits(EventGroupHandle_t xEventGroup);
