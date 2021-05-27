@@ -8,8 +8,10 @@
 #include <stdio.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <rc_servo.h>
+#include "Configuration.h"
 
 int8_t percent = 0;
+SemaphoreHandle_t semaphore_mutex = NULL;
 
 void WindowController_handler_task( void *pvParameters );
 
@@ -26,16 +28,16 @@ void WindowController_handler_initialise(UBaseType_t WindowController_task_prior
 
 void WindowController_handler_task(void *pvParameters)
 {
-	printf("startWindowController");
+	printf("startWindowController \n");
 	(void)pvParameters;
-	
-	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
-	xLastWakeTime = xTaskGetTickCount();
+	semaphore_mutex = get_mutex();
+	xSemaphoreGive(semaphore_mutex);
 	
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		rc_servo_setPosition(0, percent);
+		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
+			rc_servo_setPosition(0, configuration_get_windows_data());
+			xSemaphoreGive(semaphore_mutex);
+		}
 	}
 }

@@ -6,19 +6,22 @@
  */ 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include <ATMEGA_FreeRTOS.h>
 
 #include <lora_driver.h>
 #include <status_leds.h>
 #include <message_buffer.h>
+#include "Configuration.h"
 
 void DownLinkHandler_lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _downlink_payload;
-uint16_t maxHumSetting; // Max Humidity
-int16_t maxTempSetting; // Max Temperature
+int8_t windowDataSetting; // Windows Data setting
+uint8_t humDataSetting; // Humidifier Data setting
 MessageBufferHandle_t _downLinkMessageBufferHandle;
+
 
 
 void DownLinkHandler_lora_handler_initialise(UBaseType_t DownLinkHandler_lora_handler_task_priority, MessageBufferHandle_t downLinkMessageBufferHandle)
@@ -35,14 +38,12 @@ void DownLinkHandler_lora_handler_initialise(UBaseType_t DownLinkHandler_lora_ha
 
 void DownLinkHandler_lora_handler_task( void *pvParameters )
 {
-	
-	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
-	xLastWakeTime = xTaskGetTickCount();
+	configuration_create();
+	SemaphoreHandle_t semaphore_mutex = get_mutex();
+	xSemaphoreGive(semaphore_mutex);
 	
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		printf("startLoraDownlinkTask\n");
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
@@ -50,8 +51,17 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 		if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
 		{
 			// decode the payload into our variables
-			maxHumSetting = (_downlink_payload.bytes[0] << 8) + _downlink_payload.bytes[1];
-			maxTempSetting = (_downlink_payload.bytes[2] << 8) + _downlink_payload.bytes[3];
+			humDataSetting  = (_downlink_payload.bytes[2]);
+			windowDataSetting = (_downlink_payload.bytes[3]);	
+			printf("%d : Window Setting \n%d : Humidity Setting",windowDataSetting,humDataSetting);
+			for(;;){
+				if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
+					configuration_set_windows_data(windowDataSetting);
+					configuration_set_humidity_data(humDataSetting);
+					xSemaphoreGive(semaphore_mutex);
+					break;
+				}
+			}
 		}
 	}
 }

@@ -19,7 +19,11 @@ WindowController.d WindowController.o: .././WindowController.c \
  ../FreeRTOS/src/FreeRTOSVariant.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
- ../FreeRTOS/src/list.h ../drivers/rc_servo.h
+ ../FreeRTOS/src/list.h ../drivers/rc_servo.h .././Configuration.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
+ ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
+ ../drivers/FreeRTOSTraceDriver.h ../drivers/stdio_driver.h \
+ ../drivers/serial.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
@@ -72,3 +76,17 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../FreeRTOS/src/list.h:
 
 ../drivers/rc_servo.h:
+
+.././Configuration.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
+
+../FreeRTOS/src/semphr.h:
+
+../FreeRTOS/src/queue.h:
+
+../drivers/FreeRTOSTraceDriver.h:
+
+../drivers/stdio_driver.h:
+
+../drivers/serial.h:
