@@ -34,7 +34,7 @@ void SensorDataPackageHandler_SetTemperature(int16_t temperature){
 }
 
 lora_driver_payload_t SensorDataPackageHandler_getLoRaPayload(){
-	printf("STARTEDSensorDataPackageHandler");
+	printf("STARTEDSensorDataPackageHandler\n");
 	printf("and this is the changed hum %u\n", humIn16);
 	printf("and also the changed temp %u\n", tempIn16);
 	printf("and also the changed CO2 %u\n", co2_ppmIn16);

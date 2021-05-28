@@ -101,9 +101,9 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(iob.o)
                               ../drivers\libIotLibrary.a(stdio_driver.o) (__iob)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(printf.o)
-                              Application.o (printf)
+                              CO2Sensor.o (printf)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(puts.o)
-                              DownLinkHandler.o (puts)
+                              Application.o (puts)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(sprintf.o)
                               ../drivers\libIotLibrary.a(lora_driver.o) (sprintf)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
@@ -115,13 +115,11 @@ Common symbol       size              file
 rc                  0x1               CO2Sensor.o
 xCreatedEventGroup  0x2               Application.o
 __brkval            0x2               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
-windowDataSetting   0x1               DownLinkHandler.o
 getCO2return        0x1               CO2Sensor.o
 portTickRateHz      0x4               FreeRTOS/src/port.o
 CO2ppm              0x2               CO2Sensor.o
 downLinkMessageBufferHandle
                     0x2               main.o
-humDataSetting      0x1               DownLinkHandler.o
 _downLinkMessageBufferHandle
                     0x2               DownLinkHandler.o
 humidity_setting    0x1               Configuration.o
@@ -145,8 +143,6 @@ Discarded input sections
  .text          0x00000000        0x0 Configuration.o
  .data          0x00000000        0x0 Configuration.o
  .bss           0x00000000        0x0 Configuration.o
- .text.configuration_get_windows_data
-                0x00000000        0x6 Configuration.o
  .text.configuration_get_humidity_data
                 0x00000000        0x6 Configuration.o
  .text          0x00000000        0x0 DownLinkHandler.o
@@ -320,25 +316,6 @@ Discarded input sections
  .text          0x00000000        0x0 WindowController.o
  .data          0x00000000        0x0 WindowController.o
  .bss           0x00000000        0x0 WindowController.o
- .rodata.str1.1
-                0x00000000       0x2c WindowController.o
- .text.WindowController_handler_task
-                0x00000000       0x60 WindowController.o
- .text.WindowController_handler_initialise
-                0x00000000       0x28 WindowController.o
- .bss.semaphore_mutex
-                0x00000000        0x2 WindowController.o
- .bss.percent   0x00000000        0x1 WindowController.o
- .debug_info    0x00000000      0x2b7 WindowController.o
- .debug_abbrev  0x00000000      0x111 WindowController.o
- .debug_loc     0x00000000       0x8e WindowController.o
- .debug_aranges
-                0x00000000       0x28 WindowController.o
- .debug_ranges  0x00000000       0x18 WindowController.o
- .debug_line    0x00000000      0x161 WindowController.o
- .debug_str     0x00000000      0x2e7 WindowController.o
- .comment       0x00000000       0x31 WindowController.o
- .debug_frame   0x00000000       0x44 WindowController.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
@@ -807,7 +784,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x6e9e
+.text           0x00000000     0x6e9a
  *(.vectors)
  .vectors       0x00000000       0xe4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega2560/avr6/crtatmega2560.o
                 0x00000000                __vector_default
@@ -930,325 +907,334 @@ END GROUP
                 0x0000031c        0xc Application.o
                 0x0000031c                Application_aFunctionToClearBits
  .text.Application_aFunctionToWaitBits
-                0x00000328       0x7a Application.o
+                0x00000328       0x72 Application.o
                 0x00000328                Application_aFunctionToWaitBits
  .text.Application_handler_task
-                0x000003a2       0x52 Application.o
-                0x000003a2                Application_handler_task
+                0x0000039a       0x4a Application.o
+                0x0000039a                Application_handler_task
  .text.Application_handler_initialise
-                0x000003f4       0x28 Application.o
-                0x000003f4                Application_handler_initialise
+                0x000003e4       0x28 Application.o
+                0x000003e4                Application_handler_initialise
  .text.CO2Sensor_handler_initialise
-                0x0000041c       0x28 CO2Sensor.o
-                0x0000041c                CO2Sensor_handler_initialise
+                0x0000040c       0x28 CO2Sensor.o
+                0x0000040c                CO2Sensor_handler_initialise
  .text.CO2Sensor_getCO2InUint16
-                0x00000444        0xa CO2Sensor.o
-                0x00000444                CO2Sensor_getCO2InUint16
+                0x00000434        0xa CO2Sensor.o
+                0x00000434                CO2Sensor_getCO2InUint16
  .text.CO2Sensor_aFunctionToSetBits
-                0x0000044e        0xc CO2Sensor.o
-                0x0000044e                CO2Sensor_aFunctionToSetBits
+                0x0000043e        0xc CO2Sensor.o
+                0x0000043e                CO2Sensor_aFunctionToSetBits
  .text.CO2Sensor_handler_task
-                0x0000045a       0x88 CO2Sensor.o
-                0x0000045a                CO2Sensor_handler_task
+                0x0000044a       0x78 CO2Sensor.o
+                0x0000044a                CO2Sensor_handler_task
  .text.configuration_create
-                0x000004e2       0x34 Configuration.o
-                0x000004e2                configuration_create
+                0x000004c2       0x34 Configuration.o
+                0x000004c2                configuration_create
+ .text.configuration_get_windows_data
+                0x000004f6        0x6 Configuration.o
+                0x000004f6                configuration_get_windows_data
  .text.configuration_set_windows_data
-                0x00000516       0x32 Configuration.o
-                0x00000516                configuration_set_windows_data
+                0x000004fc       0x32 Configuration.o
+                0x000004fc                configuration_set_windows_data
  .text.configuration_set_humidity_data
-                0x00000548       0x32 Configuration.o
-                0x00000548                configuration_set_humidity_data
+                0x0000052e       0x32 Configuration.o
+                0x0000052e                configuration_set_humidity_data
  .text.get_mutex
-                0x0000057a        0xa Configuration.o
-                0x0000057a                get_mutex
+                0x00000560        0xa Configuration.o
+                0x00000560                get_mutex
  .text.DownLinkHandler_lora_handler_task
-                0x00000584       0xca DownLinkHandler.o
-                0x00000584                DownLinkHandler_lora_handler_task
+                0x0000056a       0xa2 DownLinkHandler.o
+                0x0000056a                DownLinkHandler_lora_handler_task
  .text.DownLinkHandler_lora_handler_initialise
-                0x0000064e       0x30 DownLinkHandler.o
-                0x0000064e                DownLinkHandler_lora_handler_initialise
+                0x0000060c       0x30 DownLinkHandler.o
+                0x0000060c                DownLinkHandler_lora_handler_initialise
  .text.prvTestWaitCondition
-                0x0000067e       0x42 FreeRTOS/src/event_groups.o
+                0x0000063c       0x42 FreeRTOS/src/event_groups.o
  .text.xEventGroupCreate
-                0x000006c0       0x26 FreeRTOS/src/event_groups.o
-                0x000006c0                xEventGroupCreate
+                0x0000067e       0x26 FreeRTOS/src/event_groups.o
+                0x0000067e                xEventGroupCreate
  .text.xEventGroupWaitBits
-                0x000006e6      0x140 FreeRTOS/src/event_groups.o
-                0x000006e6                xEventGroupWaitBits
+                0x000006a4      0x140 FreeRTOS/src/event_groups.o
+                0x000006a4                xEventGroupWaitBits
  .text.xEventGroupClearBits
-                0x00000826       0x3a FreeRTOS/src/event_groups.o
-                0x00000826                xEventGroupClearBits
+                0x000007e4       0x3a FreeRTOS/src/event_groups.o
+                0x000007e4                xEventGroupClearBits
  .text.xEventGroupSetBits
-                0x00000860      0x11c FreeRTOS/src/event_groups.o
-                0x00000860                xEventGroupSetBits
+                0x0000081e      0x11c FreeRTOS/src/event_groups.o
+                0x0000081e                xEventGroupSetBits
  .text.prvHeapInit
-                0x0000097c       0x52 FreeRTOS/src/heap_4.o
+                0x0000093a       0x52 FreeRTOS/src/heap_4.o
  .text.prvInsertBlockIntoFreeList
-                0x000009ce       0x94 FreeRTOS/src/heap_4.o
+                0x0000098c       0x94 FreeRTOS/src/heap_4.o
  .text.pvPortMalloc
-                0x00000a62      0x152 FreeRTOS/src/heap_4.o
-                0x00000a62                pvPortMalloc
+                0x00000a20      0x152 FreeRTOS/src/heap_4.o
+                0x00000a20                pvPortMalloc
  .text.vPortFree
-                0x00000bb4       0x7a FreeRTOS/src/heap_4.o
-                0x00000bb4                vPortFree
+                0x00000b72       0x7a FreeRTOS/src/heap_4.o
+                0x00000b72                vPortFree
  .text.vListInitialise
-                0x00000c2e       0x22 FreeRTOS/src/list.o
-                0x00000c2e                vListInitialise
+                0x00000bec       0x22 FreeRTOS/src/list.o
+                0x00000bec                vListInitialise
  .text.vListInitialiseItem
-                0x00000c50        0x8 FreeRTOS/src/list.o
-                0x00000c50                vListInitialiseItem
+                0x00000c0e        0x8 FreeRTOS/src/list.o
+                0x00000c0e                vListInitialiseItem
  .text.vListInsert
-                0x00000c58       0x7a FreeRTOS/src/list.o
-                0x00000c58                vListInsert
+                0x00000c16       0x7a FreeRTOS/src/list.o
+                0x00000c16                vListInsert
  .text.uxListRemove
-                0x00000cd2       0x4e FreeRTOS/src/list.o
-                0x00000cd2                uxListRemove
+                0x00000c90       0x4e FreeRTOS/src/list.o
+                0x00000c90                uxListRemove
  .text.prvSetupTimerInterrupt
-                0x00000d20       0x18 FreeRTOS/src/port.o
+                0x00000cde       0x18 FreeRTOS/src/port.o
  .text.pxPortInitialiseStack
-                0x00000d38       0x2e FreeRTOS/src/port.o
-                0x00000d38                pxPortInitialiseStack
+                0x00000cf6       0x2e FreeRTOS/src/port.o
+                0x00000cf6                pxPortInitialiseStack
  .text.xPortStartScheduler
-                0x00000d66       0x64 FreeRTOS/src/port.o
-                0x00000d66                xPortStartScheduler
+                0x00000d24       0x64 FreeRTOS/src/port.o
+                0x00000d24                xPortStartScheduler
  .text.vPortYield
-                0x00000dca       0xc2 FreeRTOS/src/port.o
-                0x00000dca                vPortYield
+                0x00000d88       0xc2 FreeRTOS/src/port.o
+                0x00000d88                vPortYield
  .text.vPortYieldFromTick
-                0x00000e8c       0xca FreeRTOS/src/port.o
-                0x00000e8c                vPortYieldFromTick
+                0x00000e4a       0xca FreeRTOS/src/port.o
+                0x00000e4a                vPortYieldFromTick
  .text.__vector_12
-                0x00000f56        0x4 FreeRTOS/src/port.o
-                0x00000f56                __vector_12
+                0x00000f14        0x4 FreeRTOS/src/port.o
+                0x00000f14                __vector_12
  .text.prvGetDisinheritPriorityAfterTimeout
-                0x00000f5a       0x20 FreeRTOS/src/queue.o
+                0x00000f18       0x20 FreeRTOS/src/queue.o
  .text.prvIsQueueEmpty
-                0x00000f7a       0x1a FreeRTOS/src/queue.o
+                0x00000f38       0x1a FreeRTOS/src/queue.o
  .text.prvIsQueueFull
-                0x00000f94       0x1c FreeRTOS/src/queue.o
+                0x00000f52       0x1c FreeRTOS/src/queue.o
  .text.prvCopyDataToQueue
-                0x00000fb0       0xbe FreeRTOS/src/queue.o
+                0x00000f6e       0xbe FreeRTOS/src/queue.o
  .text.prvCopyDataFromQueue
-                0x0000106e       0x34 FreeRTOS/src/queue.o
+                0x0000102c       0x34 FreeRTOS/src/queue.o
  .text.prvUnlockQueue
-                0x000010a2       0x68 FreeRTOS/src/queue.o
+                0x00001060       0x68 FreeRTOS/src/queue.o
  .text.xQueueGenericReset
-                0x0000110a       0x86 FreeRTOS/src/queue.o
-                0x0000110a                xQueueGenericReset
+                0x000010c8       0x86 FreeRTOS/src/queue.o
+                0x000010c8                xQueueGenericReset
  .text.prvInitialiseNewQueue
-                0x00001190       0x24 FreeRTOS/src/queue.o
+                0x0000114e       0x24 FreeRTOS/src/queue.o
  .text.xQueueGenericCreate
-                0x000011b4       0x46 FreeRTOS/src/queue.o
-                0x000011b4                xQueueGenericCreate
+                0x00001172       0x46 FreeRTOS/src/queue.o
+                0x00001172                xQueueGenericCreate
  .text.xQueueGenericSend
-                0x000011fa      0x124 FreeRTOS/src/queue.o
-                0x000011fa                xQueueGenericSend
+                0x000011b8      0x124 FreeRTOS/src/queue.o
+                0x000011b8                xQueueGenericSend
  .text.prvInitialiseMutex
-                0x0000131e       0x24 FreeRTOS/src/queue.o
+                0x000012dc       0x24 FreeRTOS/src/queue.o
  .text.xQueueCreateMutex
-                0x00001342       0x18 FreeRTOS/src/queue.o
-                0x00001342                xQueueCreateMutex
+                0x00001300       0x18 FreeRTOS/src/queue.o
+                0x00001300                xQueueCreateMutex
  .text.xQueueGenericSendFromISR
-                0x0000135a       0x76 FreeRTOS/src/queue.o
-                0x0000135a                xQueueGenericSendFromISR
+                0x00001318       0x76 FreeRTOS/src/queue.o
+                0x00001318                xQueueGenericSendFromISR
  .text.xQueueReceive
-                0x000013d0      0x11e FreeRTOS/src/queue.o
-                0x000013d0                xQueueReceive
+                0x0000138e      0x11e FreeRTOS/src/queue.o
+                0x0000138e                xQueueReceive
  .text.xQueueSemaphoreTake
-                0x000014ee      0x162 FreeRTOS/src/queue.o
-                0x000014ee                xQueueSemaphoreTake
+                0x000014ac      0x162 FreeRTOS/src/queue.o
+                0x000014ac                xQueueSemaphoreTake
  .text.vQueueWaitForMessageRestricted
-                0x00001650       0x38 FreeRTOS/src/queue.o
-                0x00001650                vQueueWaitForMessageRestricted
+                0x0000160e       0x38 FreeRTOS/src/queue.o
+                0x0000160e                vQueueWaitForMessageRestricted
  .text.prvBytesInBuffer
-                0x00001688       0x26 FreeRTOS/src/stream_buffer.o
+                0x00001646       0x26 FreeRTOS/src/stream_buffer.o
  .text.prvInitialiseNewStreamBuffer
-                0x000016ae       0x20 FreeRTOS/src/stream_buffer.o
+                0x0000166c       0x20 FreeRTOS/src/stream_buffer.o
  .text.prvWriteBytesToBuffer
-                0x000016ce       0x92 FreeRTOS/src/stream_buffer.o
+                0x0000168c       0x92 FreeRTOS/src/stream_buffer.o
  .text.prvWriteMessageToBuffer
-                0x00001760       0x86 FreeRTOS/src/stream_buffer.o
+                0x0000171e       0x86 FreeRTOS/src/stream_buffer.o
  .text.prvReadBytesFromBuffer
-                0x000017e6       0x9e FreeRTOS/src/stream_buffer.o
+                0x000017a4       0x9e FreeRTOS/src/stream_buffer.o
  .text.prvReadMessageFromBuffer
-                0x00001884       0x8a FreeRTOS/src/stream_buffer.o
+                0x00001842       0x8a FreeRTOS/src/stream_buffer.o
  .text.xStreamBufferGenericCreate
-                0x0000190e       0x64 FreeRTOS/src/stream_buffer.o
-                0x0000190e                xStreamBufferGenericCreate
+                0x000018cc       0x64 FreeRTOS/src/stream_buffer.o
+                0x000018cc                xStreamBufferGenericCreate
  .text.xStreamBufferReset
-                0x00001972       0x3c FreeRTOS/src/stream_buffer.o
-                0x00001972                xStreamBufferReset
+                0x00001930       0x3c FreeRTOS/src/stream_buffer.o
+                0x00001930                xStreamBufferReset
  .text.xStreamBufferSpacesAvailable
-                0x000019ae       0x24 FreeRTOS/src/stream_buffer.o
-                0x000019ae                xStreamBufferSpacesAvailable
+                0x0000196c       0x24 FreeRTOS/src/stream_buffer.o
+                0x0000196c                xStreamBufferSpacesAvailable
  .text.xStreamBufferSend
-                0x000019d2      0x18a FreeRTOS/src/stream_buffer.o
-                0x000019d2                xStreamBufferSend
+                0x00001990      0x18a FreeRTOS/src/stream_buffer.o
+                0x00001990                xStreamBufferSend
  .text.xStreamBufferSendFromISR
-                0x00001b5c       0x88 FreeRTOS/src/stream_buffer.o
-                0x00001b5c                xStreamBufferSendFromISR
+                0x00001b1a       0x88 FreeRTOS/src/stream_buffer.o
+                0x00001b1a                xStreamBufferSendFromISR
  .text.xStreamBufferReceive
-                0x00001be4      0x106 FreeRTOS/src/stream_buffer.o
-                0x00001be4                xStreamBufferReceive
+                0x00001ba2      0x106 FreeRTOS/src/stream_buffer.o
+                0x00001ba2                xStreamBufferReceive
  .text.prvResetNextTaskUnblockTime
-                0x00001cea       0x4e FreeRTOS/src/tasks.o
+                0x00001ca8       0x4e FreeRTOS/src/tasks.o
  .text.prvDeleteTCB
-                0x00001d38       0x1a FreeRTOS/src/tasks.o
+                0x00001cf6       0x1a FreeRTOS/src/tasks.o
  .text.prvInitialiseNewTask
-                0x00001d52       0xfc FreeRTOS/src/tasks.o
+                0x00001d10       0xfc FreeRTOS/src/tasks.o
  .text.prvInitialiseTaskLists
-                0x00001e4e       0x60 FreeRTOS/src/tasks.o
+                0x00001e0c       0x60 FreeRTOS/src/tasks.o
  .text.prvAddNewTaskToReadyList
-                0x00001eae       0xde FreeRTOS/src/tasks.o
+                0x00001e6c       0xde FreeRTOS/src/tasks.o
  .text.prvCheckTasksWaitingTermination
-                0x00001f8c       0x4a FreeRTOS/src/tasks.o
+                0x00001f4a       0x4a FreeRTOS/src/tasks.o
  .text.prvAddCurrentTaskToDelayedList
-                0x00001fd6      0x144 FreeRTOS/src/tasks.o
+                0x00001f94      0x144 FreeRTOS/src/tasks.o
  .text.xTaskCreate
-                0x0000211a       0x98 FreeRTOS/src/tasks.o
-                0x0000211a                xTaskCreate
+                0x000020d8       0x98 FreeRTOS/src/tasks.o
+                0x000020d8                xTaskCreate
  .text.vTaskStartScheduler
-                0x000021b2       0x70 FreeRTOS/src/tasks.o
-                0x000021b2                vTaskStartScheduler
+                0x00002170       0x70 FreeRTOS/src/tasks.o
+                0x00002170                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x00002222        0xc FreeRTOS/src/tasks.o
-                0x00002222                vTaskSuspendAll
+                0x000021e0        0xc FreeRTOS/src/tasks.o
+                0x000021e0                vTaskSuspendAll
  .text.xTaskGetTickCount
-                0x0000222e       0x1c FreeRTOS/src/tasks.o
-                0x0000222e                xTaskGetTickCount
+                0x000021ec       0x1c FreeRTOS/src/tasks.o
+                0x000021ec                xTaskGetTickCount
  .text.xTaskIncrementTick
-                0x0000224a      0x258 FreeRTOS/src/tasks.o
-                0x0000224a                xTaskIncrementTick
+                0x00002208      0x258 FreeRTOS/src/tasks.o
+                0x00002208                xTaskIncrementTick
  .text.xTaskResumeAll
-                0x000024a2      0x1b8 FreeRTOS/src/tasks.o
-                0x000024a2                xTaskResumeAll
+                0x00002460      0x1b8 FreeRTOS/src/tasks.o
+                0x00002460                xTaskResumeAll
  .text.xTaskDelayUntil
-                0x0000265a       0xca FreeRTOS/src/tasks.o
-                0x0000265a                xTaskDelayUntil
+                0x00002618       0xca FreeRTOS/src/tasks.o
+                0x00002618                xTaskDelayUntil
  .text.vTaskDelay
-                0x00002724       0x36 FreeRTOS/src/tasks.o
-                0x00002724                vTaskDelay
+                0x000026e2       0x36 FreeRTOS/src/tasks.o
+                0x000026e2                vTaskDelay
  .text.vTaskSwitchContext
-                0x0000275a       0xca FreeRTOS/src/tasks.o
-                0x0000275a                vTaskSwitchContext
+                0x00002718       0xca FreeRTOS/src/tasks.o
+                0x00002718                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x00002824       0x2e FreeRTOS/src/tasks.o
-                0x00002824                vTaskPlaceOnEventList
+                0x000027e2       0x2e FreeRTOS/src/tasks.o
+                0x000027e2                vTaskPlaceOnEventList
  .text.vTaskPlaceOnUnorderedEventList
-                0x00002852       0x94 FreeRTOS/src/tasks.o
-                0x00002852                vTaskPlaceOnUnorderedEventList
+                0x00002810       0x94 FreeRTOS/src/tasks.o
+                0x00002810                vTaskPlaceOnUnorderedEventList
  .text.vTaskPlaceOnEventListRestricted
-                0x000028e6       0x84 FreeRTOS/src/tasks.o
-                0x000028e6                vTaskPlaceOnEventListRestricted
+                0x000028a4       0x84 FreeRTOS/src/tasks.o
+                0x000028a4                vTaskPlaceOnEventListRestricted
  .text.xTaskRemoveFromEventList
-                0x0000296a      0x15e FreeRTOS/src/tasks.o
-                0x0000296a                xTaskRemoveFromEventList
+                0x00002928      0x15e FreeRTOS/src/tasks.o
+                0x00002928                xTaskRemoveFromEventList
  .text.vTaskRemoveFromUnorderedEventList
-                0x00002ac8      0x134 FreeRTOS/src/tasks.o
-                0x00002ac8                vTaskRemoveFromUnorderedEventList
+                0x00002a86      0x134 FreeRTOS/src/tasks.o
+                0x00002a86                vTaskRemoveFromUnorderedEventList
  .text.vTaskSetTimeOutState
-                0x00002bfc       0x2c FreeRTOS/src/tasks.o
-                0x00002bfc                vTaskSetTimeOutState
+                0x00002bba       0x2c FreeRTOS/src/tasks.o
+                0x00002bba                vTaskSetTimeOutState
  .text.vTaskInternalSetTimeOutState
-                0x00002c28       0x22 FreeRTOS/src/tasks.o
-                0x00002c28                vTaskInternalSetTimeOutState
+                0x00002be6       0x22 FreeRTOS/src/tasks.o
+                0x00002be6                vTaskInternalSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x00002c4a       0xcc FreeRTOS/src/tasks.o
-                0x00002c4a                xTaskCheckForTimeOut
+                0x00002c08       0xcc FreeRTOS/src/tasks.o
+                0x00002c08                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x00002d16        0x8 FreeRTOS/src/tasks.o
-                0x00002d16                vTaskMissedYield
+                0x00002cd4        0x8 FreeRTOS/src/tasks.o
+                0x00002cd4                vTaskMissedYield
  .text.xTaskGetCurrentTaskHandle
-                0x00002d1e        0xa FreeRTOS/src/tasks.o
-                0x00002d1e                xTaskGetCurrentTaskHandle
+                0x00002cdc        0xa FreeRTOS/src/tasks.o
+                0x00002cdc                xTaskGetCurrentTaskHandle
  .text.xTaskGetSchedulerState
-                0x00002d28       0x1c FreeRTOS/src/tasks.o
-                0x00002d28                xTaskGetSchedulerState
+                0x00002ce6       0x1c FreeRTOS/src/tasks.o
+                0x00002ce6                xTaskGetSchedulerState
  .text.xTaskPriorityInherit
-                0x00002d44      0x10e FreeRTOS/src/tasks.o
-                0x00002d44                xTaskPriorityInherit
+                0x00002d02      0x10e FreeRTOS/src/tasks.o
+                0x00002d02                xTaskPriorityInherit
  .text.xTaskPriorityDisinherit
-                0x00002e52       0xb6 FreeRTOS/src/tasks.o
-                0x00002e52                xTaskPriorityDisinherit
+                0x00002e10       0xb6 FreeRTOS/src/tasks.o
+                0x00002e10                xTaskPriorityDisinherit
  .text.vTaskPriorityDisinheritAfterTimeout
-                0x00002f08       0xce FreeRTOS/src/tasks.o
-                0x00002f08                vTaskPriorityDisinheritAfterTimeout
+                0x00002ec6       0xce FreeRTOS/src/tasks.o
+                0x00002ec6                vTaskPriorityDisinheritAfterTimeout
  .text.uxTaskResetEventItemValue
-                0x00002fd6       0x54 FreeRTOS/src/tasks.o
-                0x00002fd6                uxTaskResetEventItemValue
+                0x00002f94       0x54 FreeRTOS/src/tasks.o
+                0x00002f94                uxTaskResetEventItemValue
  .text.pvTaskIncrementMutexHeldCount
-                0x0000302a       0x24 FreeRTOS/src/tasks.o
-                0x0000302a                pvTaskIncrementMutexHeldCount
+                0x00002fe8       0x24 FreeRTOS/src/tasks.o
+                0x00002fe8                pvTaskIncrementMutexHeldCount
  .text.xTaskGenericNotifyWait
-                0x0000304e      0x150 FreeRTOS/src/tasks.o
-                0x0000304e                xTaskGenericNotifyWait
+                0x0000300c      0x150 FreeRTOS/src/tasks.o
+                0x0000300c                xTaskGenericNotifyWait
  .text.xTaskGenericNotify
-                0x0000319e      0x1ee FreeRTOS/src/tasks.o
-                0x0000319e                xTaskGenericNotify
+                0x0000315c      0x1ee FreeRTOS/src/tasks.o
+                0x0000315c                xTaskGenericNotify
  .text.xTaskGenericNotifyFromISR
-                0x0000338c      0x244 FreeRTOS/src/tasks.o
-                0x0000338c                xTaskGenericNotifyFromISR
+                0x0000334a      0x244 FreeRTOS/src/tasks.o
+                0x0000334a                xTaskGenericNotifyFromISR
  .text.xTaskGenericNotifyStateClear
-                0x000035d0       0x34 FreeRTOS/src/tasks.o
-                0x000035d0                xTaskGenericNotifyStateClear
+                0x0000358e       0x34 FreeRTOS/src/tasks.o
+                0x0000358e                xTaskGenericNotifyStateClear
  .text.prvGetNextExpireTime
-                0x00003604       0x30 FreeRTOS/src/timers.o
+                0x000035c2       0x30 FreeRTOS/src/timers.o
  .text.prvInsertTimerInActiveList
-                0x00003634       0x92 FreeRTOS/src/timers.o
+                0x000035f2       0x92 FreeRTOS/src/timers.o
  .text.prvCheckForValidListAndQueue
-                0x000036c6       0x52 FreeRTOS/src/timers.o
+                0x00003684       0x52 FreeRTOS/src/timers.o
  .text.xTimerCreateTimerTask
-                0x00003718       0x42 FreeRTOS/src/timers.o
-                0x00003718                xTimerCreateTimerTask
+                0x000036d6       0x42 FreeRTOS/src/timers.o
+                0x000036d6                xTimerCreateTimerTask
  .text.xTimerGenericCommand
-                0x0000375a       0xbc FreeRTOS/src/timers.o
-                0x0000375a                xTimerGenericCommand
+                0x00003718       0xbc FreeRTOS/src/timers.o
+                0x00003718                xTimerGenericCommand
  .text.prvSwitchTimerLists
-                0x00003816       0xd0 FreeRTOS/src/timers.o
+                0x000037d4       0xd0 FreeRTOS/src/timers.o
  .text.prvSampleTimeNow
-                0x000038e6       0x5c FreeRTOS/src/timers.o
+                0x000038a4       0x5c FreeRTOS/src/timers.o
  .text.prvProcessExpiredTimer
-                0x00003942       0xac FreeRTOS/src/timers.o
+                0x00003900       0xac FreeRTOS/src/timers.o
  .text.prvProcessTimerOrBlockTask
-                0x000039ee       0xae FreeRTOS/src/timers.o
+                0x000039ac       0xae FreeRTOS/src/timers.o
  .text.prvProcessReceivedCommands
-                0x00003a9c      0x168 FreeRTOS/src/timers.o
+                0x00003a5a      0x168 FreeRTOS/src/timers.o
  .text.vApplicationIdleHook
-                0x00003c04        0x2 FreeRTOS/src/variantHooks.o
-                0x00003c04                vApplicationIdleHook
+                0x00003bc2        0x2 FreeRTOS/src/variantHooks.o
+                0x00003bc2                vApplicationIdleHook
  .text.prvSetMainLedOn
-                0x00003c06        0xe FreeRTOS/src/variantHooks.o
-                0x00003c06                prvSetMainLedOn
+                0x00003bc4        0xe FreeRTOS/src/variantHooks.o
+                0x00003bc4                prvSetMainLedOn
  .text.prvBlinkMainLed
-                0x00003c14        0x8 FreeRTOS/src/variantHooks.o
-                0x00003c14                prvBlinkMainLed
+                0x00003bd2        0x8 FreeRTOS/src/variantHooks.o
+                0x00003bd2                prvBlinkMainLed
  .text.vApplicationMallocFailedHook
-                0x00003c1c       0x18 FreeRTOS/src/variantHooks.o
-                0x00003c1c                vApplicationMallocFailedHook
+                0x00003bda       0x18 FreeRTOS/src/variantHooks.o
+                0x00003bda                vApplicationMallocFailedHook
  .text.vApplicationStackOverflowHook
-                0x00003c34       0x18 FreeRTOS/src/variantHooks.o
-                0x00003c34                vApplicationStackOverflowHook
+                0x00003bf2       0x18 FreeRTOS/src/variantHooks.o
+                0x00003bf2                vApplicationStackOverflowHook
  .text.hih8120_handler_initialise
-                0x00003c4c       0x46 hih8120.o
-                0x00003c4c                hih8120_handler_initialise
+                0x00003c0a       0x46 hih8120.o
+                0x00003c0a                hih8120_handler_initialise
  .text.hih820_getHumidityInUint16
-                0x00003c92       0x1e hih8120.o
-                0x00003c92                hih820_getHumidityInUint16
+                0x00003c50       0x1e hih8120.o
+                0x00003c50                hih820_getHumidityInUint16
  .text.hih820_getTemperatureInUint16
-                0x00003cb0       0x14 hih8120.o
-                0x00003cb0                hih820_getTemperatureInUint16
+                0x00003c6e       0x14 hih8120.o
+                0x00003c6e                hih820_getTemperatureInUint16
  .text.hih820_aFunctionToSetBits
-                0x00003cc4        0xe hih8120.o
-                0x00003cc4                hih820_aFunctionToSetBits
+                0x00003c82        0xe hih8120.o
+                0x00003c82                hih820_aFunctionToSetBits
  .text.hih820_handler_task
-                0x00003cd2       0xb8 hih8120.o
-                0x00003cd2                hih820_handler_task
+                0x00003c90       0x68 hih8120.o
+                0x00003c90                hih820_handler_task
+ .text.WindowController_handler_task
+                0x00003cf8       0x66 WindowController.o
+                0x00003cf8                WindowController_handler_task
+ .text.WindowController_handler_initialise
+                0x00003d5e       0x28 WindowController.o
+                0x00003d5e                WindowController_handler_initialise
  .text.create_semaphores
-                0x00003d8a       0x34 main.o
-                0x00003d8a                create_semaphores
- .text.main     0x00003dbe       0x60 main.o
-                0x00003dbe                main
+                0x00003d86       0x34 main.o
+                0x00003d86                create_semaphores
+ .text.main     0x00003dba       0x64 main.o
+                0x00003dba                main
  .text.SensorDataPackageHandler_SetCO2
                 0x00003e1e        0xa SensorDataPackageHandler.o
                 0x00003e1e                SensorDataPackageHandler_SetCO2
@@ -1259,337 +1245,337 @@ END GROUP
                 0x00003e32        0xa SensorDataPackageHandler.o
                 0x00003e32                SensorDataPackageHandler_SetTemperature
  .text.SensorDataPackageHandler_getLoRaPayload
-                0x00003e3c       0xae SensorDataPackageHandler.o
+                0x00003e3c       0xaa SensorDataPackageHandler.o
                 0x00003e3c                SensorDataPackageHandler_getLoRaPayload
  .text._lora_setup
-                0x00003eea      0x170 UpLinkHandler.o
+                0x00003ee6      0x170 UpLinkHandler.o
  .text.UpLinkHandler_lora_handler_task
-                0x0000405a       0xa6 UpLinkHandler.o
-                0x0000405a                UpLinkHandler_lora_handler_task
+                0x00004056       0xa6 UpLinkHandler.o
+                0x00004056                UpLinkHandler_lora_handler_task
  .text.UpLinkHandler_lora_handler_initialise
-                0x00004100       0x28 UpLinkHandler.o
-                0x00004100                UpLinkHandler_lora_handler_initialise
+                0x000040fc       0x28 UpLinkHandler.o
+                0x000040fc                UpLinkHandler_lora_handler_initialise
  .text._hihTwiCallback
-                0x00004128       0x5a ../drivers\libIotLibrary.a(hih8120.o)
+                0x00004124       0x5a ../drivers\libIotLibrary.a(hih8120.o)
  .text.hih8120_initialise
-                0x00004182       0x30 ../drivers\libIotLibrary.a(hih8120.o)
-                0x00004182                hih8120_initialise
+                0x0000417e       0x30 ../drivers\libIotLibrary.a(hih8120.o)
+                0x0000417e                hih8120_initialise
  .text.hih8120_wakeup
-                0x000041b2       0x2a ../drivers\libIotLibrary.a(hih8120.o)
-                0x000041b2                hih8120_wakeup
+                0x000041ae       0x2a ../drivers\libIotLibrary.a(hih8120.o)
+                0x000041ae                hih8120_wakeup
  .text.hih8120_measure
-                0x000041dc       0x22 ../drivers\libIotLibrary.a(hih8120.o)
-                0x000041dc                hih8120_measure
+                0x000041d8       0x22 ../drivers\libIotLibrary.a(hih8120.o)
+                0x000041d8                hih8120_measure
  .text.hih8120_getHumidity
-                0x000041fe       0x2a ../drivers\libIotLibrary.a(hih8120.o)
-                0x000041fe                hih8120_getHumidity
+                0x000041fa       0x2a ../drivers\libIotLibrary.a(hih8120.o)
+                0x000041fa                hih8120_getHumidity
  .text.hih8120_getHumidityPercent_x10
-                0x00004228       0x16 ../drivers\libIotLibrary.a(hih8120.o)
-                0x00004228                hih8120_getHumidityPercent_x10
+                0x00004224       0x16 ../drivers\libIotLibrary.a(hih8120.o)
+                0x00004224                hih8120_getHumidityPercent_x10
  .text.hih8120_getTemperature
-                0x0000423e       0x36 ../drivers\libIotLibrary.a(hih8120.o)
-                0x0000423e                hih8120_getTemperature
+                0x0000423a       0x36 ../drivers\libIotLibrary.a(hih8120.o)
+                0x0000423a                hih8120_getTemperature
  .text.hih8120_getTemperature_x10
-                0x00004274       0x16 ../drivers\libIotLibrary.a(hih8120.o)
-                0x00004274                hih8120_getTemperature_x10
+                0x00004270       0x16 ../drivers\libIotLibrary.a(hih8120.o)
+                0x00004270                hih8120_getTemperature_x10
  .text._serialCallBack
-                0x0000428a       0x8c ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004286       0x8c ../drivers\libIotLibrary.a(lora_driver.o)
  .text._uploadMessage
-                0x00004316       0xb4 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004312       0xb4 ../drivers\libIotLibrary.a(lora_driver.o)
  .text._reply2ReturnCode
-                0x000043ca       0xea ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000043c6       0xea ../drivers\libIotLibrary.a(lora_driver.o)
  .text._uploadMessageRc
-                0x000044b4        0x6 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000044b0        0x6 ../drivers\libIotLibrary.a(lora_driver.o)
  .text.lora_driver_flushBuffers
-                0x000044ba        0xe ../drivers\libIotLibrary.a(lora_driver.o)
-                0x000044ba                lora_driver_flushBuffers
+                0x000044b6        0xe ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000044b6                lora_driver_flushBuffers
  .text.lora_driver_initialise
-                0x000044c8       0x80 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x000044c8                lora_driver_initialise
+                0x000044c4       0x80 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000044c4                lora_driver_initialise
  .text.lora_driver_resetRn2483
-                0x00004548       0x1c ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004548                lora_driver_resetRn2483
+                0x00004544       0x1c ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004544                lora_driver_resetRn2483
  .text.lora_driver_rn2483FactoryReset
-                0x00004564       0x24 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004564                lora_driver_rn2483FactoryReset
+                0x00004560       0x24 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004560                lora_driver_rn2483FactoryReset
  .text.lora_driver_getRn2483Hweui
-                0x00004588       0x38 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004588                lora_driver_getRn2483Hweui
+                0x00004584       0x38 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004584                lora_driver_getRn2483Hweui
  .text.lora_driver_setDeviceIdentifier
-                0x000045c0       0x22 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x000045c0                lora_driver_setDeviceIdentifier
+                0x000045bc       0x22 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000045bc                lora_driver_setDeviceIdentifier
  .text.lora_driver_setApplicationIdentifier
-                0x000045e2       0x22 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x000045e2                lora_driver_setApplicationIdentifier
+                0x000045de       0x22 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000045de                lora_driver_setApplicationIdentifier
  .text.lora_driver_setApplicationKey
-                0x00004604       0x22 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004604                lora_driver_setApplicationKey
+                0x00004600       0x22 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004600                lora_driver_setApplicationKey
  .text.lora_driver_saveMac
-                0x00004626        0xc ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004626                lora_driver_saveMac
+                0x00004622        0xc ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004622                lora_driver_saveMac
  .text.lora_driver_join
-                0x00004632       0x52 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004632                lora_driver_join
+                0x0000462e       0x52 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x0000462e                lora_driver_join
  .text.lora_driver_sendUploadMessage
-                0x00004684      0x196 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004684                lora_driver_sendUploadMessage
+                0x00004680      0x196 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004680                lora_driver_sendUploadMessage
  .text.lora_driver_setAdaptiveDataRate
-                0x0000481a       0x16 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x0000481a                lora_driver_setAdaptiveDataRate
+                0x00004816       0x16 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004816                lora_driver_setAdaptiveDataRate
  .text.lora_driver_setReceiveDelay
-                0x00004830       0x30 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004830                lora_driver_setReceiveDelay
+                0x0000482c       0x30 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x0000482c                lora_driver_setReceiveDelay
  .text.lora_driver_configureToEu868
-                0x00004860      0x1bc ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004860                lora_driver_configureToEu868
+                0x0000485c      0x1bc ../drivers\libIotLibrary.a(lora_driver.o)
+                0x0000485c                lora_driver_configureToEu868
  .text.lora_driver_setOtaaIdentity
-                0x00004a1c       0x42 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004a1c                lora_driver_setOtaaIdentity
+                0x00004a18       0x42 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004a18                lora_driver_setOtaaIdentity
  .text.lora_driver_mapReturnCodeToText
-                0x00004a5e       0x18 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00004a5e                lora_driver_mapReturnCodeToText
+                0x00004a5a       0x18 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00004a5a                lora_driver_mapReturnCodeToText
  .text.decode_port_no
-                0x00004a76       0x58 ../drivers\libIotLibrary.a(lora_driver_utils.o)
-                0x00004a76                decode_port_no
+                0x00004a72       0x58 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+                0x00004a72                decode_port_no
  .text.decode_hexadecimal_string_bytes
-                0x00004ace       0x92 ../drivers\libIotLibrary.a(lora_driver_utils.o)
-                0x00004ace                decode_hexadecimal_string_bytes
+                0x00004aca       0x92 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+                0x00004aca                decode_hexadecimal_string_bytes
  .text._serialCallBack
-                0x00004b60       0xb6 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00004b5c       0xb6 ../drivers\libIotLibrary.a(mh_z19.o)
  .text.mh_z19_initialise
-                0x00004c16       0x4a ../drivers\libIotLibrary.a(mh_z19.o)
-                0x00004c16                mh_z19_initialise
+                0x00004c12       0x4a ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00004c12                mh_z19_initialise
  .text.mh_z19_injectCallBack
-                0x00004c60        0xa ../drivers\libIotLibrary.a(mh_z19.o)
-                0x00004c60                mh_z19_injectCallBack
+                0x00004c5c        0xa ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00004c5c                mh_z19_injectCallBack
  .text.mh_z19_takeMeassuring
-                0x00004c6a       0x5e ../drivers\libIotLibrary.a(mh_z19.o)
-                0x00004c6a                mh_z19_takeMeassuring
+                0x00004c66       0x5e ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00004c66                mh_z19_takeMeassuring
  .text.mh_z19_getCo2Ppm
-                0x00004cc8       0x22 ../drivers\libIotLibrary.a(mh_z19.o)
-                0x00004cc8                mh_z19_getCo2Ppm
+                0x00004cc4       0x22 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00004cc4                mh_z19_getCo2Ppm
  .text.rc_servo_setPosition
-                0x00004cea       0x30 ../drivers\libIotLibrary.a(rc_servo.o)
-                0x00004cea                rc_servo_setPosition
+                0x00004ce6       0x30 ../drivers\libIotLibrary.a(rc_servo.o)
+                0x00004ce6                rc_servo_setPosition
  .text.rc_servo_initialise
-                0x00004d1a       0x38 ../drivers\libIotLibrary.a(rc_servo.o)
-                0x00004d1a                rc_servo_initialise
+                0x00004d16       0x38 ../drivers\libIotLibrary.a(rc_servo.o)
+                0x00004d16                rc_servo_initialise
  .text.serial_create
-                0x00004d52      0x144 ../drivers\libIotLibrary.a(serial.o)
-                0x00004d52                serial_create
+                0x00004d4e      0x144 ../drivers\libIotLibrary.a(serial.o)
+                0x00004d4e                serial_create
  .text.serial_sendByte
-                0x00004e96       0x56 ../drivers\libIotLibrary.a(serial.o)
-                0x00004e96                serial_sendByte
+                0x00004e92       0x56 ../drivers\libIotLibrary.a(serial.o)
+                0x00004e92                serial_sendByte
  .text.serial_sendBytes
-                0x00004eec       0xaa ../drivers\libIotLibrary.a(serial.o)
-                0x00004eec                serial_sendBytes
+                0x00004ee8       0xaa ../drivers\libIotLibrary.a(serial.o)
+                0x00004ee8                serial_sendBytes
  .text.serial_getByte
-                0x00004f96       0x40 ../drivers\libIotLibrary.a(serial.o)
-                0x00004f96                serial_getByte
+                0x00004f92       0x40 ../drivers\libIotLibrary.a(serial.o)
+                0x00004f92                serial_getByte
  .text.__vector_25
-                0x00004fd6       0xa4 ../drivers\libIotLibrary.a(serial.o)
-                0x00004fd6                __vector_25
+                0x00004fd2       0xa4 ../drivers\libIotLibrary.a(serial.o)
+                0x00004fd2                __vector_25
  .text.__vector_26
-                0x0000507a       0x88 ../drivers\libIotLibrary.a(serial.o)
-                0x0000507a                __vector_26
+                0x00005076       0x88 ../drivers\libIotLibrary.a(serial.o)
+                0x00005076                __vector_26
  .text.__vector_36
-                0x00005102       0xa4 ../drivers\libIotLibrary.a(serial.o)
-                0x00005102                __vector_36
+                0x000050fe       0xa4 ../drivers\libIotLibrary.a(serial.o)
+                0x000050fe                __vector_36
  .text.__vector_37
-                0x000051a6       0x88 ../drivers\libIotLibrary.a(serial.o)
-                0x000051a6                __vector_37
+                0x000051a2       0x88 ../drivers\libIotLibrary.a(serial.o)
+                0x000051a2                __vector_37
  .text.__vector_51
-                0x0000522e       0xa4 ../drivers\libIotLibrary.a(serial.o)
-                0x0000522e                __vector_51
+                0x0000522a       0xa4 ../drivers\libIotLibrary.a(serial.o)
+                0x0000522a                __vector_51
  .text.__vector_52
-                0x000052d2       0x88 ../drivers\libIotLibrary.a(serial.o)
-                0x000052d2                __vector_52
+                0x000052ce       0x88 ../drivers\libIotLibrary.a(serial.o)
+                0x000052ce                __vector_52
  .text.__vector_54
-                0x0000535a       0xa4 ../drivers\libIotLibrary.a(serial.o)
-                0x0000535a                __vector_54
+                0x00005356       0xa4 ../drivers\libIotLibrary.a(serial.o)
+                0x00005356                __vector_54
  .text.__vector_55
-                0x000053fe       0x88 ../drivers\libIotLibrary.a(serial.o)
-                0x000053fe                __vector_55
+                0x000053fa       0x88 ../drivers\libIotLibrary.a(serial.o)
+                0x000053fa                __vector_55
  .text.usart_getchar
-                0x00005486       0x2a ../drivers\libIotLibrary.a(stdio_driver.o)
+                0x00005482       0x2a ../drivers\libIotLibrary.a(stdio_driver.o)
  .text.usart_putchar
-                0x000054b0       0x12 ../drivers\libIotLibrary.a(stdio_driver.o)
+                0x000054ac       0x12 ../drivers\libIotLibrary.a(stdio_driver.o)
  .text.stdio_initialise
-                0x000054c2       0x52 ../drivers\libIotLibrary.a(stdio_driver.o)
-                0x000054c2                stdio_initialise
+                0x000054be       0x52 ../drivers\libIotLibrary.a(stdio_driver.o)
+                0x000054be                stdio_initialise
  .text._turn_off
-                0x00005514       0x98 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00005510       0x98 ../drivers\libIotLibrary.a(status_leds.o)
  .text._turn_on
-                0x000055ac       0x98 ../drivers\libIotLibrary.a(status_leds.o)
+                0x000055a8       0x98 ../drivers\libIotLibrary.a(status_leds.o)
  .text._hal_led_task
-                0x00005644       0x8c ../drivers\libIotLibrary.a(status_leds.o)
+                0x00005640       0x8c ../drivers\libIotLibrary.a(status_leds.o)
  .text.status_leds_initialise
-                0x000056d0       0x9c ../drivers\libIotLibrary.a(status_leds.o)
-                0x000056d0                status_leds_initialise
+                0x000056cc       0x9c ../drivers\libIotLibrary.a(status_leds.o)
+                0x000056cc                status_leds_initialise
  .text.status_leds_slowBlink
-                0x0000576c       0x46 ../drivers\libIotLibrary.a(status_leds.o)
-                0x0000576c                status_leds_slowBlink
+                0x00005768       0x46 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00005768                status_leds_slowBlink
  .text.status_leds_fastBlink
-                0x000057b2       0x46 ../drivers\libIotLibrary.a(status_leds.o)
-                0x000057b2                status_leds_fastBlink
+                0x000057ae       0x46 ../drivers\libIotLibrary.a(status_leds.o)
+                0x000057ae                status_leds_fastBlink
  .text.status_leds_ledOn
-                0x000057f8       0x1e ../drivers\libIotLibrary.a(status_leds.o)
-                0x000057f8                status_leds_ledOn
+                0x000057f4       0x1e ../drivers\libIotLibrary.a(status_leds.o)
+                0x000057f4                status_leds_ledOn
  .text.status_leds_ledOff
-                0x00005816       0x1e ../drivers\libIotLibrary.a(status_leds.o)
-                0x00005816                status_leds_ledOff
+                0x00005812       0x1e ../drivers\libIotLibrary.a(status_leds.o)
+                0x00005812                status_leds_ledOff
  .text.status_leds_longPuls
-                0x00005834       0x24 ../drivers\libIotLibrary.a(status_leds.o)
-                0x00005834                status_leds_longPuls
+                0x00005830       0x24 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00005830                status_leds_longPuls
  .text.status_leds_shortPuls
-                0x00005858       0x24 ../drivers\libIotLibrary.a(status_leds.o)
-                0x00005858                status_leds_shortPuls
+                0x00005854       0x24 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00005854                status_leds_shortPuls
  .text._initTwiInterface
-                0x0000587c       0x22 ../drivers\libIotLibrary.a(twi.o)
+                0x00005878       0x22 ../drivers\libIotLibrary.a(twi.o)
  .text.twiCreate
-                0x0000589e       0x9a ../drivers\libIotLibrary.a(twi.o)
-                0x0000589e                twiCreate
+                0x0000589a       0x9a ../drivers\libIotLibrary.a(twi.o)
+                0x0000589a                twiCreate
  .text.twiIsBusy
-                0x00005938        0x8 ../drivers\libIotLibrary.a(twi.o)
-                0x00005938                twiIsBusy
+                0x00005934        0x8 ../drivers\libIotLibrary.a(twi.o)
+                0x00005934                twiIsBusy
  .text.twiTransmit
-                0x00005940       0x98 ../drivers\libIotLibrary.a(twi.o)
-                0x00005940                twiTransmit
+                0x0000593c       0x98 ../drivers\libIotLibrary.a(twi.o)
+                0x0000593c                twiTransmit
  .text.twiReceive
-                0x000059d8       0x66 ../drivers\libIotLibrary.a(twi.o)
-                0x000059d8                twiReceive
+                0x000059d4       0x66 ../drivers\libIotLibrary.a(twi.o)
+                0x000059d4                twiReceive
  .text.__vector_39
-                0x00005a3e      0x17a ../drivers\libIotLibrary.a(twi.o)
-                0x00005a3e                __vector_39
+                0x00005a3a      0x17a ../drivers\libIotLibrary.a(twi.o)
+                0x00005a3a                __vector_39
  .text.fifo_init
-                0x00005bb8       0x38 ../drivers\libIotLibrary.a(fifo.o)
-                0x00005bb8                fifo_init
+                0x00005bb4       0x38 ../drivers\libIotLibrary.a(fifo.o)
+                0x00005bb4                fifo_init
  .text.avr-libc.fplib
-                0x00005bf0        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
-                0x00005bf0                __subsf3
-                0x00005bf2                __addsf3
+                0x00005bec        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3.o)
+                0x00005bec                __subsf3
+                0x00005bee                __addsf3
  .text.avr-libc.fplib
-                0x00005bfa       0xc0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3x.o)
-                0x00005c14                __addsf3x
+                0x00005bf6       0xc0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(addsf3x.o)
+                0x00005c10                __addsf3x
  .text.avr-libc.fplib
-                0x00005cba        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3.o)
-                0x00005cba                __divsf3
+                0x00005cb6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3.o)
+                0x00005cb6                __divsf3
  .text.avr-libc.fplib
-                0x00005cbe       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3x.o)
-                0x00005cd4                __divsf3x
-                0x00005cd8                __divsf3_pse
+                0x00005cba       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(divsf3x.o)
+                0x00005cd0                __divsf3x
+                0x00005cd4                __divsf3_pse
  .text.avr-libc.fplib
-                0x00005d8a        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixsfsi.o)
-                0x00005d8a                __fixsfsi
+                0x00005d86        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixsfsi.o)
+                0x00005d86                __fixsfsi
  .text.avr-libc.fplib
-                0x00005d94       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
-                0x00005d94                __fixunssfsi
+                0x00005d90       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fixunssfsi.o)
+                0x00005d90                __fixunssfsi
  .text.avr-libc.fplib
-                0x00005dec       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(floatsisf.o)
-                0x00005dec                __floatunsisf
-                0x00005df0                __floatsisf
+                0x00005de8       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(floatsisf.o)
+                0x00005de8                __floatunsisf
+                0x00005dec                __floatsisf
  .text.avr-libc.fplib
-                0x00005e66        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_inf.o)
-                0x00005e66                __fp_inf
+                0x00005e62        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_inf.o)
+                0x00005e62                __fp_inf
  .text.avr-libc.fplib
-                0x00005e72        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_nan.o)
-                0x00005e72                __fp_nan
+                0x00005e6e        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_nan.o)
+                0x00005e6e                __fp_nan
  .text.avr-libc.fplib
-                0x00005e78        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
-                0x00005e78                __fp_pscA
+                0x00005e74        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscA.o)
+                0x00005e74                __fp_pscA
  .text.avr-libc.fplib
-                0x00005e86        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
-                0x00005e86                __fp_pscB
+                0x00005e82        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_pscB.o)
+                0x00005e82                __fp_pscB
  .text.avr-libc.fplib
-                0x00005e94       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_round.o)
-                0x00005e94                __fp_round
+                0x00005e90       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_round.o)
+                0x00005e90                __fp_round
  .text.avr-libc.fplib
-                0x00005eb6       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_split3.o)
-                0x00005eb6                __fp_split3
-                0x00005ec6                __fp_splitA
+                0x00005eb2       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_split3.o)
+                0x00005eb2                __fp_split3
+                0x00005ec2                __fp_splitA
  .text.avr-libc.fplib
-                0x00005efa        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_zero.o)
-                0x00005efa                __fp_zero
-                0x00005efc                __fp_szero
+                0x00005ef6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(fp_zero.o)
+                0x00005ef6                __fp_zero
+                0x00005ef8                __fp_szero
  .text.avr-libc.fplib
-                0x00005f08        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3.o)
-                0x00005f08                __mulsf3
+                0x00005f04        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3.o)
+                0x00005f04                __mulsf3
  .text.avr-libc.fplib
-                0x00005f0c       0xc2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
-                0x00005f20                __mulsf3x
-                0x00005f24                __mulsf3_pse
+                0x00005f08       0xc2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libm.a(mulsf3x.o)
+                0x00005f1c                __mulsf3x
+                0x00005f20                __mulsf3_pse
  .text.avr-libc
-                0x00005fce      0x712 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libprintf_flt.a(vfprintf_flt.o)
-                0x00005fce                vfprintf
+                0x00005fca      0x712 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libprintf_flt.a(vfprintf_flt.o)
+                0x00005fca                vfprintf
  .text.libgcc.div
-                0x000066e0       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
-                0x000066e0                _div
-                0x000066e0                __divmodhi4
+                0x000066dc       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_divmodhi4.o)
+                0x000066dc                _div
+                0x000066dc                __divmodhi4
  .text.libgcc.div
-                0x00006706       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
-                0x00006706                __udivmodsi4
- .text.libgcc   0x0000674a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_tablejump2.o)
-                0x0000674a                __tablejump2__
+                0x00006702       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodsi4.o)
+                0x00006702                __udivmodsi4
+ .text.libgcc   0x00006746       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_tablejump2.o)
+                0x00006746                __tablejump2__
  .text.libgcc.mul
-                0x0000675a       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_umulhisi3.o)
-                0x0000675a                __umulhisi3
+                0x00006756       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_umulhisi3.o)
+                0x00006756                __umulhisi3
  .text.libgcc.div
-                0x00006778       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
-                0x00006778                __udivmodhi4
+                0x00006774       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_udivmodhi4.o)
+                0x00006774                __udivmodhi4
  .text.avr-libc
-                0x000067a0      0x242 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
-                0x000067a0                malloc
-                0x000068d0                free
+                0x0000679c      0x242 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
+                0x0000679c                malloc
+                0x000068cc                free
  .text.avr-libc
-                0x000069e2        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(abort.o)
-                0x000069e2                abort
+                0x000069de        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(abort.o)
+                0x000069de                abort
  .text.avr-libc
-                0x000069ea      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
-                0x000069ea                __ftoa_engine
+                0x000069e6      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ftoa_engine.o)
+                0x000069e6                __ftoa_engine
  .text.avr-libc
-                0x00006b9a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen_P.o)
-                0x00006b9a                strnlen_P
+                0x00006b96       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen_P.o)
+                0x00006b96                strnlen_P
  .text.avr-libc
-                0x00006bb0       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(memcpy.o)
-                0x00006bb0                memcpy
+                0x00006bac       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(memcpy.o)
+                0x00006bac                memcpy
  .text.avr-libc
-                0x00006bc2        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(memset.o)
-                0x00006bc2                memset
+                0x00006bbe        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(memset.o)
+                0x00006bbe                memset
  .text.avr-libc
-                0x00006bd0       0x4a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcasestr.o)
-                0x00006bd0                strcasestr
+                0x00006bcc       0x4a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcasestr.o)
+                0x00006bcc                strcasestr
  .text.avr-libc
-                0x00006c1a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
-                0x00006c1a                strcat
+                0x00006c16       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcat.o)
+                0x00006c16                strcat
  .text.avr-libc
-                0x00006c30        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcpy.o)
-                0x00006c30                strcpy
+                0x00006c2c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strcpy.o)
+                0x00006c2c                strcpy
  .text.avr-libc
-                0x00006c3e       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strncasecmp.o)
-                0x00006c3e                strncasecmp
+                0x00006c3a       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strncasecmp.o)
+                0x00006c3a                strncasecmp
  .text.avr-libc
-                0x00006c6e       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen.o)
-                0x00006c6e                strnlen
+                0x00006c6a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(strnlen.o)
+                0x00006c6a                strnlen
  .text.avr-libc
-                0x00006c84       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(fputc.o)
-                0x00006c84                fputc
+                0x00006c80       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(fputc.o)
+                0x00006c80                fputc
  .text.avr-libc
-                0x00006cfc       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(printf.o)
-                0x00006cfc                printf
+                0x00006cf8       0x26 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(printf.o)
+                0x00006cf8                printf
  .text.avr-libc
-                0x00006d22       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(puts.o)
-                0x00006d22                puts
+                0x00006d1e       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(puts.o)
+                0x00006d1e                puts
  .text.avr-libc
-                0x00006d82       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(sprintf.o)
-                0x00006d82                sprintf
+                0x00006d7e       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(sprintf.o)
+                0x00006d7e                sprintf
  .text.avr-libc
-                0x00006dde       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
-                0x00006dde                __ultoa_invert
-                0x00006e9a                . = ALIGN (0x2)
+                0x00006dda       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(ultoa_invert.o)
+                0x00006dda                __ultoa_invert
+                0x00006e96                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00006e9a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
-                0x00006e9a                _exit
-                0x00006e9a                exit
+ .fini9         0x00006e96        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+                0x00006e96                _exit
+                0x00006e96                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1608,11 +1594,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00006e9a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
+ .fini0         0x00006e96        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_exit.o)
  *(.fini0)
-                0x00006e9e                _etext = .
+                0x00006e9a                _etext = .
 
-.data           0x00800200      0x68e load address 0x00006e9e
+.data           0x00800200      0x662 load address 0x00006e9a
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
@@ -1638,222 +1624,235 @@ END GROUP
  .rodata        0x00800242       0x2d ../drivers\libIotLibrary.a(mh_z19.o)
  *(.rodata*)
  .rodata.str1.1
-                0x0080026f       0x40 Application.o
+                0x0080026f       0x42 Application.o
  .rodata.str1.1
-                0x008002af       0x2d CO2Sensor.o
+                0x008002b1       0x24 CO2Sensor.o
  .rodata.str1.1
-                0x008002dc       0x33 Configuration.o
+                0x008002d5       0x36 Configuration.o
  .rodata.str1.1
-                0x0080030f       0x82 DownLinkHandler.o
+                0x0080030b       0x5a DownLinkHandler.o
  .rodata.str1.1
-                0x00800391        0x5 FreeRTOS/src/tasks.o
+                0x00800365        0x5 FreeRTOS/src/tasks.o
  .rodata.str1.1
-                0x00800396        0x8 FreeRTOS/src/timers.o
+                0x0080036a        0x8 FreeRTOS/src/timers.o
  .rodata.str1.1
-                0x0080039e       0x38 hih8120.o
+                0x00800372        0xb hih8120.o
+                                  0xf (size before relaxing)
  .rodata.str1.1
-                0x008003d6       0x12 main.o
+                0x0080037d       0x2c WindowController.o
  .rodata.str1.1
-                0x008003e8       0x7b SensorDataPackageHandler.o
+                0x008003a9       0x12 main.o
  .rodata.str1.1
-                0x00800463      0x157 UpLinkHandler.o
+                0x008003bb       0x7b SensorDataPackageHandler.o
  .rodata.str1.1
-                0x008005ba      0x295 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00800436      0x157 UpLinkHandler.o
+ .rodata.str1.1
+                0x0080058d      0x295 ../drivers\libIotLibrary.a(lora_driver.o)
                                 0x2a5 (size before relaxing)
  .rodata._joinMode
-                0x0080084f        0x4 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00800822        0x4 ../drivers\libIotLibrary.a(lora_driver.o)
  .rodata._returnCode
-                0x00800853       0x33 ../drivers\libIotLibrary.a(lora_driver.o)
-                0x00800853                _returnCode
+                0x00800826       0x33 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00800826                _returnCode
  .rodata.str1.1
-                0x00800886        0x8 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00800859        0x8 ../drivers\libIotLibrary.a(status_leds.o)
  *(.gnu.linkonce.r*)
-                0x0080088e                . = ALIGN (0x2)
-                0x0080088e                _edata = .
-                0x0080088e                PROVIDE (__data_end, .)
+                0x00800862                . = ALIGN (0x2)
+ *fill*         0x00800861        0x1 
+                0x00800862                _edata = .
+                0x00800862                PROVIDE (__data_end, .)
 
-.bss            0x0080088e      0xf6e
-                0x0080088e                PROVIDE (__bss_start, .)
+.bss            0x00800862      0xf71
+                0x00800862                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss._configurationSemaphore
-                0x0080088e        0x2 Configuration.o
-                0x0080088e                _configurationSemaphore
+                0x00800862        0x2 Configuration.o
+                0x00800862                _configurationSemaphore
+ .bss.humDataSetting
+                0x00800864        0x1 DownLinkHandler.o
+                0x00800864                humDataSetting
+ .bss.windowDataSetting
+                0x00800865        0x1 DownLinkHandler.o
+                0x00800865                windowDataSetting
  .bss._downlink_payload
-                0x00800890       0x16 DownLinkHandler.o
+                0x00800866       0x16 DownLinkHandler.o
  .bss.xBlockAllocatedBit
-                0x008008a6        0x2 FreeRTOS/src/heap_4.o
+                0x0080087c        0x2 FreeRTOS/src/heap_4.o
  .bss.xNumberOfSuccessfulFrees
-                0x008008a8        0x2 FreeRTOS/src/heap_4.o
+                0x0080087e        0x2 FreeRTOS/src/heap_4.o
  .bss.xNumberOfSuccessfulAllocations
-                0x008008aa        0x2 FreeRTOS/src/heap_4.o
+                0x00800880        0x2 FreeRTOS/src/heap_4.o
  .bss.xMinimumEverFreeBytesRemaining
-                0x008008ac        0x2 FreeRTOS/src/heap_4.o
+                0x00800882        0x2 FreeRTOS/src/heap_4.o
  .bss.xFreeBytesRemaining
-                0x008008ae        0x2 FreeRTOS/src/heap_4.o
- .bss.pxEnd     0x008008b0        0x2 FreeRTOS/src/heap_4.o
- .bss.xStart    0x008008b2        0x4 FreeRTOS/src/heap_4.o
- .bss.ucHeap    0x008008b6      0xc80 FreeRTOS/src/heap_4.o
+                0x00800884        0x2 FreeRTOS/src/heap_4.o
+ .bss.pxEnd     0x00800886        0x2 FreeRTOS/src/heap_4.o
+ .bss.xStart    0x00800888        0x4 FreeRTOS/src/heap_4.o
+ .bss.ucHeap    0x0080088c      0xc80 FreeRTOS/src/heap_4.o
  .bss.uxSchedulerSuspended
-                0x00801536        0x1 FreeRTOS/src/tasks.o
+                0x0080150c        0x1 FreeRTOS/src/tasks.o
  .bss.xIdleTaskHandle
-                0x00801537        0x2 FreeRTOS/src/tasks.o
+                0x0080150d        0x2 FreeRTOS/src/tasks.o
  .bss.xNextTaskUnblockTime
-                0x00801539        0x4 FreeRTOS/src/tasks.o
+                0x0080150f        0x4 FreeRTOS/src/tasks.o
  .bss.uxTaskNumber
-                0x0080153d        0x1 FreeRTOS/src/tasks.o
+                0x00801513        0x1 FreeRTOS/src/tasks.o
  .bss.xNumOfOverflows
-                0x0080153e        0x1 FreeRTOS/src/tasks.o
+                0x00801514        0x1 FreeRTOS/src/tasks.o
  .bss.xYieldPending
-                0x0080153f        0x1 FreeRTOS/src/tasks.o
+                0x00801515        0x1 FreeRTOS/src/tasks.o
  .bss.xPendedTicks
-                0x00801540        0x4 FreeRTOS/src/tasks.o
+                0x00801516        0x4 FreeRTOS/src/tasks.o
  .bss.xSchedulerRunning
-                0x00801544        0x1 FreeRTOS/src/tasks.o
+                0x0080151a        0x1 FreeRTOS/src/tasks.o
  .bss.uxTopReadyPriority
-                0x00801545        0x1 FreeRTOS/src/tasks.o
+                0x0080151b        0x1 FreeRTOS/src/tasks.o
  .bss.xTickCount
-                0x00801546        0x4 FreeRTOS/src/tasks.o
+                0x0080151c        0x4 FreeRTOS/src/tasks.o
  .bss.uxCurrentNumberOfTasks
-                0x0080154a        0x1 FreeRTOS/src/tasks.o
+                0x00801520        0x1 FreeRTOS/src/tasks.o
  .bss.xSuspendedTaskList
-                0x0080154b        0xb FreeRTOS/src/tasks.o
+                0x00801521        0xb FreeRTOS/src/tasks.o
  .bss.uxDeletedTasksWaitingCleanUp
-                0x00801556        0x1 FreeRTOS/src/tasks.o
+                0x0080152c        0x1 FreeRTOS/src/tasks.o
  .bss.xTasksWaitingTermination
-                0x00801557        0xb FreeRTOS/src/tasks.o
+                0x0080152d        0xb FreeRTOS/src/tasks.o
  .bss.xPendingReadyList
-                0x00801562        0xb FreeRTOS/src/tasks.o
+                0x00801538        0xb FreeRTOS/src/tasks.o
  .bss.pxOverflowDelayedTaskList
-                0x0080156d        0x2 FreeRTOS/src/tasks.o
+                0x00801543        0x2 FreeRTOS/src/tasks.o
  .bss.pxDelayedTaskList
-                0x0080156f        0x2 FreeRTOS/src/tasks.o
+                0x00801545        0x2 FreeRTOS/src/tasks.o
  .bss.xDelayedTaskList2
-                0x00801571        0xb FreeRTOS/src/tasks.o
+                0x00801547        0xb FreeRTOS/src/tasks.o
  .bss.xDelayedTaskList1
-                0x0080157c        0xb FreeRTOS/src/tasks.o
+                0x00801552        0xb FreeRTOS/src/tasks.o
  .bss.pxReadyTasksLists
-                0x00801587       0x6e FreeRTOS/src/tasks.o
+                0x0080155d       0x6e FreeRTOS/src/tasks.o
  .bss.pxCurrentTCB
-                0x008015f5        0x2 FreeRTOS/src/tasks.o
-                0x008015f5                pxCurrentTCB
+                0x008015cb        0x2 FreeRTOS/src/tasks.o
+                0x008015cb                pxCurrentTCB
  .bss.xLastTime.2436
-                0x008015f7        0x4 FreeRTOS/src/timers.o
+                0x008015cd        0x4 FreeRTOS/src/timers.o
  .bss.xTimerTaskHandle
-                0x008015fb        0x2 FreeRTOS/src/timers.o
+                0x008015d1        0x2 FreeRTOS/src/timers.o
  .bss.xTimerQueue
-                0x008015fd        0x2 FreeRTOS/src/timers.o
+                0x008015d3        0x2 FreeRTOS/src/timers.o
  .bss.pxOverflowTimerList
-                0x008015ff        0x2 FreeRTOS/src/timers.o
+                0x008015d5        0x2 FreeRTOS/src/timers.o
  .bss.pxCurrentTimerList
-                0x00801601        0x2 FreeRTOS/src/timers.o
+                0x008015d7        0x2 FreeRTOS/src/timers.o
  .bss.xActiveTimerList2
-                0x00801603        0xb FreeRTOS/src/timers.o
+                0x008015d9        0xb FreeRTOS/src/timers.o
  .bss.xActiveTimerList1
-                0x0080160e        0xb FreeRTOS/src/timers.o
+                0x008015e4        0xb FreeRTOS/src/timers.o
  .bss.temperatureIn16
-                0x00801619        0x2 hih8120.o
-                0x00801619                temperatureIn16
+                0x008015ef        0x2 hih8120.o
+                0x008015ef                temperatureIn16
  .bss.humidityIn16
-                0x0080161b        0x2 hih8120.o
-                0x0080161b                humidityIn16
+                0x008015f1        0x2 hih8120.o
+                0x008015f1                humidityIn16
+ .bss.semaphore_mutex
+                0x008015f3        0x2 WindowController.o
+                0x008015f3                semaphore_mutex
+ .bss.percent   0x008015f5        0x1 WindowController.o
+                0x008015f5                percent
  .bss._uplink_payload
-                0x0080161d       0x16 SensorDataPackageHandler.o
+                0x008015f6       0x16 SensorDataPackageHandler.o
  .bss.co2_ppmIn16
-                0x00801633        0x2 SensorDataPackageHandler.o
-                0x00801633                co2_ppmIn16
- .bss.tempIn16  0x00801635        0x2 SensorDataPackageHandler.o
-                0x00801635                tempIn16
- .bss.humIn16   0x00801637        0x2 SensorDataPackageHandler.o
-                0x00801637                humIn16
+                0x0080160c        0x2 SensorDataPackageHandler.o
+                0x0080160c                co2_ppmIn16
+ .bss.tempIn16  0x0080160e        0x2 SensorDataPackageHandler.o
+                0x0080160e                tempIn16
+ .bss.humIn16   0x00801610        0x2 SensorDataPackageHandler.o
+                0x00801610                humIn16
  .bss._uplink_payload
-                0x00801639       0x16 UpLinkHandler.o
- .bss._out_buf  0x0080164f       0x64 UpLinkHandler.o
+                0x00801612       0x16 UpLinkHandler.o
+ .bss._out_buf  0x00801628       0x64 UpLinkHandler.o
  .bss._measuringIsReady
-                0x008016b3        0x1 ../drivers\libIotLibrary.a(hih8120.o)
+                0x0080168c        0x1 ../drivers\libIotLibrary.a(hih8120.o)
  .bss._hih8120Handler
-                0x008016b4        0x2 ../drivers\libIotLibrary.a(hih8120.o)
+                0x0080168d        0x2 ../drivers\libIotLibrary.a(hih8120.o)
  .bss._tmp_buf.2871
-                0x008016b6       0x37 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x0080168f       0x37 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss.rec_buf_inp.2878
-                0x008016ed        0x1 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016c6        0x1 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._downlinkMessageBuffer
-                0x008016ee        0x2 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016c7        0x2 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._serialReplyBufferHandle
-                0x008016f0        0x2 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016c9        0x2 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._rn2483_serial
-                0x008016f2        0x2 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016cb        0x2 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._downlinkPayload
-                0x008016f4       0x16 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016cd       0x16 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._payLoadHexBytes
-                0x0080170a       0x15 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016e3       0x15 ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._recMessageBuf
-                0x0080171f       0x2d ../drivers\libIotLibrary.a(lora_driver.o)
+                0x008016f8       0x2d ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._sendMessage
-                0x0080174c       0x2d ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00801725       0x2d ../drivers\libIotLibrary.a(lora_driver.o)
  .bss._replyMess
-                0x00801779       0x2d ../drivers\libIotLibrary.a(lora_driver.o)
+                0x00801752       0x2d ../drivers\libIotLibrary.a(lora_driver.o)
  .bss.data.1944
-                0x008017a6        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x0080177f        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
  .bss.inDex.1943
-                0x008017a8        0x1 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00801781        0x1 ../drivers\libIotLibrary.a(mh_z19.o)
  .bss.crc_sum.1945
-                0x008017a9        0x1 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00801782        0x1 ../drivers\libIotLibrary.a(mh_z19.o)
  .bss._appCallBack
-                0x008017aa        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00801783        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
  .bss._mh_state
-                0x008017ac        0x1 ../drivers\libIotLibrary.a(mh_z19.o)
-                0x008017ac                _mh_state
- .bss._ppm      0x008017ad        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
- .bss._serial   0x008017af        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00801785        0x1 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00801785                _mh_state
+ .bss._ppm      0x00801786        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
+ .bss._serial   0x00801788        0x2 ../drivers\libIotLibrary.a(mh_z19.o)
  .bss._ser_handle
-                0x008017b1        0x8 ../drivers\libIotLibrary.a(serial.o)
+                0x0080178a        0x8 ../drivers\libIotLibrary.a(serial.o)
  .bss._com_serial_instance
-                0x008017b9        0x2 ../drivers\libIotLibrary.a(stdio_driver.o)
+                0x00801792        0x2 ../drivers\libIotLibrary.a(stdio_driver.o)
  .bss._led_status
-                0x008017bb       0x18 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00801794       0x18 ../drivers\libIotLibrary.a(status_leds.o)
  .bss._index.1885
-                0x008017d3        0x1 ../drivers\libIotLibrary.a(twi.o)
+                0x008017ac        0x1 ../drivers\libIotLibrary.a(twi.o)
  .bss._twiCurrentHandler
-                0x008017d4        0x2 ../drivers\libIotLibrary.a(twi.o)
+                0x008017ad        0x2 ../drivers\libIotLibrary.a(twi.o)
  .bss._twiMessageLen
-                0x008017d6        0x1 ../drivers\libIotLibrary.a(twi.o)
+                0x008017af        0x1 ../drivers\libIotLibrary.a(twi.o)
  .bss._twiMessageBuffer
-                0x008017d7        0xa ../drivers\libIotLibrary.a(twi.o)
+                0x008017b0        0xa ../drivers\libIotLibrary.a(twi.o)
  .bss._twiIsInitiated
-                0x008017e1        0x1 ../drivers\libIotLibrary.a(twi.o)
+                0x008017ba        0x1 ../drivers\libIotLibrary.a(twi.o)
  *(COMMON)
- COMMON         0x008017e2        0x2 Application.o
-                0x008017e2                xCreatedEventGroup
- COMMON         0x008017e4        0x4 CO2Sensor.o
-                0x008017e4                rc
-                0x008017e5                getCO2return
-                0x008017e6                CO2ppm
- COMMON         0x008017e8        0x2 Configuration.o
-                0x008017e8                humidity_setting
-                0x008017e9                windows_settings
- COMMON         0x008017ea        0x4 DownLinkHandler.o
-                0x008017ea                windowDataSetting
-                0x008017eb                humDataSetting
-                0x008017ec                _downLinkMessageBufferHandle
- COMMON         0x008017ee        0x4 main.o
-                0x008017ee                downLinkMessageBufferHandle
-                0x008017f0                xTestSemaphore
- COMMON         0x008017f2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
-                0x008017f2                __brkval
-                0x008017f4                __flp
- COMMON         0x008017f6        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(iob.o)
-                0x008017f6                __iob
-                0x008017fc                PROVIDE (__bss_end, .)
-                0x00006e9e                __data_load_start = LOADADDR (.data)
-                0x0000752c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008017bb        0x2 Application.o
+                0x008017bb                xCreatedEventGroup
+ COMMON         0x008017bd        0x4 CO2Sensor.o
+                0x008017bd                rc
+                0x008017be                getCO2return
+                0x008017bf                CO2ppm
+ COMMON         0x008017c1        0x2 Configuration.o
+                0x008017c1                humidity_setting
+                0x008017c2                windows_settings
+ COMMON         0x008017c3        0x2 DownLinkHandler.o
+                0x008017c3                _downLinkMessageBufferHandle
+ COMMON         0x008017c5        0x4 main.o
+                0x008017c5                downLinkMessageBufferHandle
+                0x008017c7                xTestSemaphore
+ COMMON         0x008017c9        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
+                0x008017c9                __brkval
+                0x008017cb                __flp
+ COMMON         0x008017cd        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(iob.o)
+                0x008017cd                __iob
+                0x008017d3                PROVIDE (__bss_end, .)
+                0x00006e9a                __data_load_start = LOADADDR (.data)
+                0x000074fc                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008017fc        0x0
+.noinit         0x008017d3        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008017fc                _end = .
-                0x008017fc                PROVIDE (__heap_start, .)
+                0x008017d3                _end = .
+                0x008017d3                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1909,6 +1908,7 @@ END GROUP
  .comment       0x00000030       0x31 FreeRTOS/src/timers.o
  .comment       0x00000030       0x31 FreeRTOS/src/variantHooks.o
  .comment       0x00000030       0x31 hih8120.o
+ .comment       0x00000030       0x31 WindowController.o
  .comment       0x00000030       0x31 main.o
  .comment       0x00000030       0x31 SensorDataPackageHandler.o
  .comment       0x00000030       0x31 UpLinkHandler.o
@@ -1951,7 +1951,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0xb88
+.debug_aranges  0x00000000      0xbb0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x40 Application.o
@@ -1982,168 +1982,174 @@ END GROUP
  .debug_aranges
                 0x000006d0       0x40 hih8120.o
  .debug_aranges
-                0x00000710       0x28 main.o
+                0x00000710       0x28 WindowController.o
  .debug_aranges
-                0x00000738       0x38 SensorDataPackageHandler.o
+                0x00000738       0x28 main.o
  .debug_aranges
-                0x00000770       0x30 UpLinkHandler.o
+                0x00000760       0x38 SensorDataPackageHandler.o
  .debug_aranges
-                0x000007a0       0x68 ../drivers\libIotLibrary.a(hih8120.o)
+                0x00000798       0x30 UpLinkHandler.o
  .debug_aranges
-                0x00000808      0x138 ../drivers\libIotLibrary.a(lora_driver.o)
+                0x000007c8       0x68 ../drivers\libIotLibrary.a(hih8120.o)
  .debug_aranges
-                0x00000940       0x28 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+                0x00000830      0x138 ../drivers\libIotLibrary.a(lora_driver.o)
  .debug_aranges
-                0x00000968       0x58 ../drivers\libIotLibrary.a(mh_z19.o)
+                0x00000968       0x28 ../drivers\libIotLibrary.a(lora_driver_utils.o)
  .debug_aranges
-                0x000009c0       0x28 ../drivers\libIotLibrary.a(rc_servo.o)
+                0x00000990       0x58 ../drivers\libIotLibrary.a(mh_z19.o)
  .debug_aranges
-                0x000009e8       0x90 ../drivers\libIotLibrary.a(serial.o)
+                0x000009e8       0x28 ../drivers\libIotLibrary.a(rc_servo.o)
  .debug_aranges
-                0x00000a78       0x38 ../drivers\libIotLibrary.a(stdio_driver.o)
+                0x00000a10       0x90 ../drivers\libIotLibrary.a(serial.o)
  .debug_aranges
-                0x00000ab0       0x68 ../drivers\libIotLibrary.a(status_leds.o)
+                0x00000aa0       0x38 ../drivers\libIotLibrary.a(stdio_driver.o)
  .debug_aranges
-                0x00000b18       0x50 ../drivers\libIotLibrary.a(twi.o)
+                0x00000ad8       0x68 ../drivers\libIotLibrary.a(status_leds.o)
  .debug_aranges
-                0x00000b68       0x20 ../drivers\libIotLibrary.a(fifo.o)
+                0x00000b40       0x50 ../drivers\libIotLibrary.a(twi.o)
+ .debug_aranges
+                0x00000b90       0x20 ../drivers\libIotLibrary.a(fifo.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0xdff0
+.debug_info     0x00000000     0xe2de
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0xbbc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_info    0x00000bbc      0x3f7 Application.o
- .debug_info    0x00000fb3      0x3a2 CO2Sensor.o
- .debug_info    0x00001355      0x246 Configuration.o
- .debug_info    0x0000159b      0x446 DownLinkHandler.o
- .debug_info    0x000019e1      0x971 FreeRTOS/src/event_groups.o
- .debug_info    0x00002352      0x4e6 FreeRTOS/src/heap_4.o
- .debug_info    0x00002838      0x2e7 FreeRTOS/src/list.o
- .debug_info    0x00002b1f      0x2ff FreeRTOS/src/port.o
- .debug_info    0x00002e1e     0x17e6 FreeRTOS/src/queue.o
- .debug_info    0x00004604     0x13df FreeRTOS/src/stream_buffer.o
- .debug_info    0x000059e3     0x2239 FreeRTOS/src/tasks.o
- .debug_info    0x00007c1c     0x10dd FreeRTOS/src/timers.o
- .debug_info    0x00008cf9      0x20f FreeRTOS/src/variantHooks.o
- .debug_info    0x00008f08      0x3f4 hih8120.o
- .debug_info    0x000092fc      0x377 main.o
- .debug_info    0x00009673      0x201 SensorDataPackageHandler.o
- .debug_info    0x00009874      0x767 UpLinkHandler.o
- .debug_info    0x00009fdb      0x3a9 ../drivers\libIotLibrary.a(hih8120.o)
- .debug_info    0x0000a384     0x1747 ../drivers\libIotLibrary.a(lora_driver.o)
- .debug_info    0x0000bacb      0x143 ../drivers\libIotLibrary.a(lora_driver_utils.o)
- .debug_info    0x0000bc0e      0x556 ../drivers\libIotLibrary.a(mh_z19.o)
- .debug_info    0x0000c164      0x10f ../drivers\libIotLibrary.a(rc_servo.o)
- .debug_info    0x0000c273      0xd9b ../drivers\libIotLibrary.a(serial.o)
- .debug_info    0x0000d00e      0x3b6 ../drivers\libIotLibrary.a(stdio_driver.o)
- .debug_info    0x0000d3c4      0x50c ../drivers\libIotLibrary.a(status_leds.o)
- .debug_info    0x0000d8d0      0x55d ../drivers\libIotLibrary.a(twi.o)
- .debug_info    0x0000de2d      0x1c3 ../drivers\libIotLibrary.a(fifo.o)
+ .debug_info    0x00000bbc      0x420 Application.o
+ .debug_info    0x00000fdc      0x399 CO2Sensor.o
+ .debug_info    0x00001375      0x246 Configuration.o
+ .debug_info    0x000015bb      0x43d DownLinkHandler.o
+ .debug_info    0x000019f8      0x971 FreeRTOS/src/event_groups.o
+ .debug_info    0x00002369      0x4e6 FreeRTOS/src/heap_4.o
+ .debug_info    0x0000284f      0x2e7 FreeRTOS/src/list.o
+ .debug_info    0x00002b36      0x2ff FreeRTOS/src/port.o
+ .debug_info    0x00002e35     0x17e6 FreeRTOS/src/queue.o
+ .debug_info    0x0000461b     0x13df FreeRTOS/src/stream_buffer.o
+ .debug_info    0x000059fa     0x2239 FreeRTOS/src/tasks.o
+ .debug_info    0x00007c33     0x10dd FreeRTOS/src/timers.o
+ .debug_info    0x00008d10      0x20f FreeRTOS/src/variantHooks.o
+ .debug_info    0x00008f1f      0x3c7 hih8120.o
+ .debug_info    0x000092e6      0x2c0 WindowController.o
+ .debug_info    0x000095a6      0x397 main.o
+ .debug_info    0x0000993d      0x225 SensorDataPackageHandler.o
+ .debug_info    0x00009b62      0x767 UpLinkHandler.o
+ .debug_info    0x0000a2c9      0x3a9 ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_info    0x0000a672     0x1747 ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_info    0x0000bdb9      0x143 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_info    0x0000befc      0x556 ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_info    0x0000c452      0x10f ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_info    0x0000c561      0xd9b ../drivers\libIotLibrary.a(serial.o)
+ .debug_info    0x0000d2fc      0x3b6 ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_info    0x0000d6b2      0x50c ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_info    0x0000dbbe      0x55d ../drivers\libIotLibrary.a(twi.o)
+ .debug_info    0x0000e11b      0x1c3 ../drivers\libIotLibrary.a(fifo.o)
 
-.debug_abbrev   0x00000000     0x3937
+.debug_abbrev   0x00000000     0x3a8b
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0xb1a C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_abbrev  0x00000b1a      0x16f Application.o
- .debug_abbrev  0x00000c89      0x189 CO2Sensor.o
- .debug_abbrev  0x00000e12       0xf6 Configuration.o
- .debug_abbrev  0x00000f08      0x177 DownLinkHandler.o
- .debug_abbrev  0x0000107f      0x1dc FreeRTOS/src/event_groups.o
- .debug_abbrev  0x0000125b      0x200 FreeRTOS/src/heap_4.o
- .debug_abbrev  0x0000145b       0xff FreeRTOS/src/list.o
- .debug_abbrev  0x0000155a      0x179 FreeRTOS/src/port.o
- .debug_abbrev  0x000016d3      0x241 FreeRTOS/src/queue.o
- .debug_abbrev  0x00001914      0x246 FreeRTOS/src/stream_buffer.o
- .debug_abbrev  0x00001b5a      0x2c8 FreeRTOS/src/tasks.o
- .debug_abbrev  0x00001e22      0x28c FreeRTOS/src/timers.o
- .debug_abbrev  0x000020ae       0xff FreeRTOS/src/variantHooks.o
- .debug_abbrev  0x000021ad      0x17a hih8120.o
- .debug_abbrev  0x00002327      0x11c main.o
- .debug_abbrev  0x00002443      0x107 SensorDataPackageHandler.o
- .debug_abbrev  0x0000254a      0x19c UpLinkHandler.o
- .debug_abbrev  0x000026e6      0x184 ../drivers\libIotLibrary.a(hih8120.o)
- .debug_abbrev  0x0000286a      0x33b ../drivers\libIotLibrary.a(lora_driver.o)
- .debug_abbrev  0x00002ba5       0xc0 ../drivers\libIotLibrary.a(lora_driver_utils.o)
- .debug_abbrev  0x00002c65      0x238 ../drivers\libIotLibrary.a(mh_z19.o)
- .debug_abbrev  0x00002e9d       0xbc ../drivers\libIotLibrary.a(rc_servo.o)
- .debug_abbrev  0x00002f59      0x355 ../drivers\libIotLibrary.a(serial.o)
- .debug_abbrev  0x000032ae      0x1b3 ../drivers\libIotLibrary.a(stdio_driver.o)
- .debug_abbrev  0x00003461      0x1d7 ../drivers\libIotLibrary.a(status_leds.o)
- .debug_abbrev  0x00003638      0x217 ../drivers\libIotLibrary.a(twi.o)
- .debug_abbrev  0x0000384f       0xe8 ../drivers\libIotLibrary.a(fifo.o)
+ .debug_abbrev  0x00000b1a      0x184 Application.o
+ .debug_abbrev  0x00000c9e      0x189 CO2Sensor.o
+ .debug_abbrev  0x00000e27       0xf6 Configuration.o
+ .debug_abbrev  0x00000f1d      0x177 DownLinkHandler.o
+ .debug_abbrev  0x00001094      0x1dc FreeRTOS/src/event_groups.o
+ .debug_abbrev  0x00001270      0x200 FreeRTOS/src/heap_4.o
+ .debug_abbrev  0x00001470       0xff FreeRTOS/src/list.o
+ .debug_abbrev  0x0000156f      0x179 FreeRTOS/src/port.o
+ .debug_abbrev  0x000016e8      0x241 FreeRTOS/src/queue.o
+ .debug_abbrev  0x00001929      0x246 FreeRTOS/src/stream_buffer.o
+ .debug_abbrev  0x00001b6f      0x2c8 FreeRTOS/src/tasks.o
+ .debug_abbrev  0x00001e37      0x28c FreeRTOS/src/timers.o
+ .debug_abbrev  0x000020c3       0xff FreeRTOS/src/variantHooks.o
+ .debug_abbrev  0x000021c2      0x17a hih8120.o
+ .debug_abbrev  0x0000233c      0x111 WindowController.o
+ .debug_abbrev  0x0000244d      0x11c main.o
+ .debug_abbrev  0x00002569      0x135 SensorDataPackageHandler.o
+ .debug_abbrev  0x0000269e      0x19c UpLinkHandler.o
+ .debug_abbrev  0x0000283a      0x184 ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_abbrev  0x000029be      0x33b ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_abbrev  0x00002cf9       0xc0 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_abbrev  0x00002db9      0x238 ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_abbrev  0x00002ff1       0xbc ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_abbrev  0x000030ad      0x355 ../drivers\libIotLibrary.a(serial.o)
+ .debug_abbrev  0x00003402      0x1b3 ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_abbrev  0x000035b5      0x1d7 ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_abbrev  0x0000378c      0x217 ../drivers\libIotLibrary.a(twi.o)
+ .debug_abbrev  0x000039a3       0xe8 ../drivers\libIotLibrary.a(fifo.o)
 
-.debug_line     0x00000000     0x6f5f
+.debug_line     0x00000000     0x70c7
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1fa C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_line    0x000001fa      0x1d3 Application.o
- .debug_line    0x000003cd      0x1a0 CO2Sensor.o
- .debug_line    0x0000056d      0x1a2 Configuration.o
- .debug_line    0x0000070f      0x1e8 DownLinkHandler.o
- .debug_line    0x000008f7      0x413 FreeRTOS/src/event_groups.o
- .debug_line    0x00000d0a      0x41f FreeRTOS/src/heap_4.o
- .debug_line    0x00001129      0x1db FreeRTOS/src/list.o
- .debug_line    0x00001304      0x28a FreeRTOS/src/port.o
- .debug_line    0x0000158e      0xbe3 FreeRTOS/src/queue.o
- .debug_line    0x00002171      0x79a FreeRTOS/src/stream_buffer.o
- .debug_line    0x0000290b     0x15ba FreeRTOS/src/tasks.o
- .debug_line    0x00003ec5      0x624 FreeRTOS/src/timers.o
- .debug_line    0x000044e9      0x1af FreeRTOS/src/variantHooks.o
- .debug_line    0x00004698      0x1da hih8120.o
- .debug_line    0x00004872      0x276 main.o
- .debug_line    0x00004ae8      0x16c SensorDataPackageHandler.o
- .debug_line    0x00004c54      0x240 UpLinkHandler.o
- .debug_line    0x00004e94      0x24a ../drivers\libIotLibrary.a(hih8120.o)
- .debug_line    0x000050de      0x9aa ../drivers\libIotLibrary.a(lora_driver.o)
- .debug_line    0x00005a88      0x195 ../drivers\libIotLibrary.a(lora_driver_utils.o)
- .debug_line    0x00005c1d      0x2fc ../drivers\libIotLibrary.a(mh_z19.o)
- .debug_line    0x00005f19       0xfd ../drivers\libIotLibrary.a(rc_servo.o)
- .debug_line    0x00006016      0x6a0 ../drivers\libIotLibrary.a(serial.o)
- .debug_line    0x000066b6      0x146 ../drivers\libIotLibrary.a(stdio_driver.o)
- .debug_line    0x000067fc      0x32c ../drivers\libIotLibrary.a(status_leds.o)
- .debug_line    0x00006b28      0x31c ../drivers\libIotLibrary.a(twi.o)
- .debug_line    0x00006e44      0x11b ../drivers\libIotLibrary.a(fifo.o)
+ .debug_line    0x000001fa      0x1d6 Application.o
+ .debug_line    0x000003d0      0x199 CO2Sensor.o
+ .debug_line    0x00000569      0x1a2 Configuration.o
+ .debug_line    0x0000070b      0x1e2 DownLinkHandler.o
+ .debug_line    0x000008ed      0x413 FreeRTOS/src/event_groups.o
+ .debug_line    0x00000d00      0x41f FreeRTOS/src/heap_4.o
+ .debug_line    0x0000111f      0x1db FreeRTOS/src/list.o
+ .debug_line    0x000012fa      0x28a FreeRTOS/src/port.o
+ .debug_line    0x00001584      0xbe3 FreeRTOS/src/queue.o
+ .debug_line    0x00002167      0x79a FreeRTOS/src/stream_buffer.o
+ .debug_line    0x00002901     0x15ba FreeRTOS/src/tasks.o
+ .debug_line    0x00003ebb      0x624 FreeRTOS/src/timers.o
+ .debug_line    0x000044df      0x1af FreeRTOS/src/variantHooks.o
+ .debug_line    0x0000468e      0x1bb hih8120.o
+ .debug_line    0x00004849      0x167 WindowController.o
+ .debug_line    0x000049b0      0x292 main.o
+ .debug_line    0x00004c42      0x17a SensorDataPackageHandler.o
+ .debug_line    0x00004dbc      0x240 UpLinkHandler.o
+ .debug_line    0x00004ffc      0x24a ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_line    0x00005246      0x9aa ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_line    0x00005bf0      0x195 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_line    0x00005d85      0x2fc ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_line    0x00006081       0xfd ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_line    0x0000617e      0x6a0 ../drivers\libIotLibrary.a(serial.o)
+ .debug_line    0x0000681e      0x146 ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_line    0x00006964      0x32c ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_line    0x00006c90      0x31c ../drivers\libIotLibrary.a(twi.o)
+ .debug_line    0x00006fac      0x11b ../drivers\libIotLibrary.a(fifo.o)
 
-.debug_frame    0x00000000     0x28f0
+.debug_frame    0x00000000     0x2914
  *(.debug_frame)
- .debug_frame   0x00000000       0xb0 Application.o
- .debug_frame   0x000000b0       0x74 CO2Sensor.o
- .debug_frame   0x00000124       0xa4 Configuration.o
- .debug_frame   0x000001c8       0x70 DownLinkHandler.o
- .debug_frame   0x00000238      0x1dc FreeRTOS/src/event_groups.o
- .debug_frame   0x00000414       0xfc FreeRTOS/src/heap_4.o
- .debug_frame   0x00000510       0x90 FreeRTOS/src/list.o
- .debug_frame   0x000005a0       0x94 FreeRTOS/src/port.o
- .debug_frame   0x00000634      0x3a4 FreeRTOS/src/queue.o
- .debug_frame   0x000009d8      0x40c FreeRTOS/src/stream_buffer.o
- .debug_frame   0x00000de4      0x7a0 FreeRTOS/src/tasks.o
- .debug_frame   0x00001584      0x3ac FreeRTOS/src/timers.o
- .debug_frame   0x00001930       0x64 FreeRTOS/src/variantHooks.o
- .debug_frame   0x00001994       0x94 hih8120.o
- .debug_frame   0x00001a28       0x3c main.o
- .debug_frame   0x00001a64       0x8c SensorDataPackageHandler.o
- .debug_frame   0x00001af0      0x110 UpLinkHandler.o
- .debug_frame   0x00001c00       0xc0 ../drivers\libIotLibrary.a(hih8120.o)
- .debug_frame   0x00001cc0      0x460 ../drivers\libIotLibrary.a(lora_driver.o)
- .debug_frame   0x00002120       0x48 ../drivers\libIotLibrary.a(lora_driver_utils.o)
- .debug_frame   0x00002168      0x100 ../drivers\libIotLibrary.a(mh_z19.o)
- .debug_frame   0x00002268       0x34 ../drivers\libIotLibrary.a(rc_servo.o)
- .debug_frame   0x0000229c      0x384 ../drivers\libIotLibrary.a(serial.o)
- .debug_frame   0x00002620       0x94 ../drivers\libIotLibrary.a(stdio_driver.o)
- .debug_frame   0x000026b4       0xec ../drivers\libIotLibrary.a(status_leds.o)
- .debug_frame   0x000027a0      0x12c ../drivers\libIotLibrary.a(twi.o)
- .debug_frame   0x000028cc       0x24 ../drivers\libIotLibrary.a(fifo.o)
+ .debug_frame   0x00000000       0xa8 Application.o
+ .debug_frame   0x000000a8       0x74 CO2Sensor.o
+ .debug_frame   0x0000011c       0xa4 Configuration.o
+ .debug_frame   0x000001c0       0x5c DownLinkHandler.o
+ .debug_frame   0x0000021c      0x1dc FreeRTOS/src/event_groups.o
+ .debug_frame   0x000003f8       0xfc FreeRTOS/src/heap_4.o
+ .debug_frame   0x000004f4       0x90 FreeRTOS/src/list.o
+ .debug_frame   0x00000584       0x94 FreeRTOS/src/port.o
+ .debug_frame   0x00000618      0x3a4 FreeRTOS/src/queue.o
+ .debug_frame   0x000009bc      0x40c FreeRTOS/src/stream_buffer.o
+ .debug_frame   0x00000dc8      0x7a0 FreeRTOS/src/tasks.o
+ .debug_frame   0x00001568      0x3ac FreeRTOS/src/timers.o
+ .debug_frame   0x00001914       0x64 FreeRTOS/src/variantHooks.o
+ .debug_frame   0x00001978       0x94 hih8120.o
+ .debug_frame   0x00001a0c       0x44 WindowController.o
+ .debug_frame   0x00001a50       0x3c main.o
+ .debug_frame   0x00001a8c       0x88 SensorDataPackageHandler.o
+ .debug_frame   0x00001b14      0x110 UpLinkHandler.o
+ .debug_frame   0x00001c24       0xc0 ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_frame   0x00001ce4      0x460 ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_frame   0x00002144       0x48 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_frame   0x0000218c      0x100 ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_frame   0x0000228c       0x34 ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_frame   0x000022c0      0x384 ../drivers\libIotLibrary.a(serial.o)
+ .debug_frame   0x00002644       0x94 ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_frame   0x000026d8       0xec ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_frame   0x000027c4      0x12c ../drivers\libIotLibrary.a(twi.o)
+ .debug_frame   0x000028f0       0x24 ../drivers\libIotLibrary.a(fifo.o)
 
-.debug_str      0x00000000     0x451e
+.debug_str      0x00000000     0x4597
  *(.debug_str)
  .debug_str     0x00000000      0x3e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega2560/avr6/crtatmega2560.o
- .debug_str     0x000003e6      0x3b2 Application.o
-                                0x411 (size before relaxing)
- .debug_str     0x00000798      0x150 CO2Sensor.o
+ .debug_str     0x000003e6      0x3c1 Application.o
+                                0x41e (size before relaxing)
+ .debug_str     0x000007a7      0x150 CO2Sensor.o
                                 0x3a8 (size before relaxing)
- .debug_str     0x000008e8      0x13d Configuration.o
+ .debug_str     0x000008f7      0x13d Configuration.o
                                 0x2e4 (size before relaxing)
- .debug_str     0x00000a25      0x1c8 DownLinkHandler.o
+ .debug_str     0x00000a34      0x1b9 DownLinkHandler.o
                                 0x444 (size before relaxing)
  .debug_str     0x00000bed      0x33c FreeRTOS/src/event_groups.o
                                 0x595 (size before relaxing)
@@ -2165,62 +2171,65 @@ END GROUP
                                 0x273 (size before relaxing)
  .debug_str     0x00002b9b      0x160 hih8120.o
                                 0x407 (size before relaxing)
- .debug_str     0x00002cfb       0xe9 main.o
-                                0x3c1 (size before relaxing)
- .debug_str     0x00002de4       0x8a SensorDataPackageHandler.o
-                                0x2ae (size before relaxing)
- .debug_str     0x00002e6e      0x3e5 UpLinkHandler.o
+ .debug_str     0x00002cfb       0x96 WindowController.o
+                                0x2e7 (size before relaxing)
+ .debug_str     0x00002d91       0xe9 main.o
+                                0x3e5 (size before relaxing)
+ .debug_str     0x00002e7a       0x8a SensorDataPackageHandler.o
+                                0x2c2 (size before relaxing)
+ .debug_str     0x00002f04      0x3e5 UpLinkHandler.o
                                 0x6a9 (size before relaxing)
- .debug_str     0x00003253      0x2f4 ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_str     0x000032e9      0x2f4 ../drivers\libIotLibrary.a(hih8120.o)
                                 0x45c (size before relaxing)
- .debug_str     0x00003547      0x68f ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_str     0x000035dd      0x68f ../drivers\libIotLibrary.a(lora_driver.o)
                                 0xcdb (size before relaxing)
- .debug_str     0x00003bd6       0x4f ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_str     0x00003c6c       0x4f ../drivers\libIotLibrary.a(lora_driver_utils.o)
                                 0x206 (size before relaxing)
- .debug_str     0x00003c25      0x106 ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_str     0x00003cbb      0x106 ../drivers\libIotLibrary.a(mh_z19.o)
                                 0x489 (size before relaxing)
- .debug_str     0x00003d2b       0x51 ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_str     0x00003dc1       0x34 ../drivers\libIotLibrary.a(rc_servo.o)
                                 0x1e2 (size before relaxing)
- .debug_str     0x00003d7c      0x2e7 ../drivers\libIotLibrary.a(serial.o)
+ .debug_str     0x00003df5      0x2e7 ../drivers\libIotLibrary.a(serial.o)
                                 0x628 (size before relaxing)
- .debug_str     0x00004063       0xa6 ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_str     0x000040dc       0xa6 ../drivers\libIotLibrary.a(stdio_driver.o)
                                 0x37d (size before relaxing)
- .debug_str     0x00004109      0x104 ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_str     0x00004182      0x104 ../drivers\libIotLibrary.a(status_leds.o)
                                 0x36d (size before relaxing)
- .debug_str     0x0000420d      0x2ef ../drivers\libIotLibrary.a(twi.o)
+ .debug_str     0x00004286      0x2ef ../drivers\libIotLibrary.a(twi.o)
                                 0x5b4 (size before relaxing)
- .debug_str     0x000044fc       0x22 ../drivers\libIotLibrary.a(fifo.o)
+ .debug_str     0x00004575       0x22 ../drivers\libIotLibrary.a(fifo.o)
                                 0x239 (size before relaxing)
 
-.debug_loc      0x00000000     0xc8aa
+.debug_loc      0x00000000     0xc89c
  *(.debug_loc)
- .debug_loc     0x00000000      0x1e7 Application.o
- .debug_loc     0x000001e7       0xfc CO2Sensor.o
- .debug_loc     0x000002e3      0x140 Configuration.o
- .debug_loc     0x00000423      0x18e DownLinkHandler.o
- .debug_loc     0x000005b1      0xcc9 FreeRTOS/src/event_groups.o
- .debug_loc     0x0000127a      0x4be FreeRTOS/src/heap_4.o
- .debug_loc     0x00001738      0x17d FreeRTOS/src/list.o
- .debug_loc     0x000018b5       0xf6 FreeRTOS/src/port.o
- .debug_loc     0x000019ab     0x1abd FreeRTOS/src/queue.o
- .debug_loc     0x00003468     0x1daf FreeRTOS/src/stream_buffer.o
- .debug_loc     0x00005217     0x2a07 FreeRTOS/src/tasks.o
- .debug_loc     0x00007c1e     0x10f3 FreeRTOS/src/timers.o
- .debug_loc     0x00008d11       0xdc FreeRTOS/src/variantHooks.o
- .debug_loc     0x00008ded      0x13d hih8120.o
- .debug_loc     0x00008f2a       0x22 main.o
- .debug_loc     0x00008f4c       0xf2 SensorDataPackageHandler.o
- .debug_loc     0x0000903e      0x3fd UpLinkHandler.o
- .debug_loc     0x0000943b       0x9f ../drivers\libIotLibrary.a(hih8120.o)
- .debug_loc     0x000094da     0x1216 ../drivers\libIotLibrary.a(lora_driver.o)
- .debug_loc     0x0000a6f0      0x1d2 ../drivers\libIotLibrary.a(lora_driver_utils.o)
- .debug_loc     0x0000a8c2      0x37c ../drivers\libIotLibrary.a(mh_z19.o)
- .debug_loc     0x0000ac3e       0x2f ../drivers\libIotLibrary.a(rc_servo.o)
- .debug_loc     0x0000ac6d     0x114c ../drivers\libIotLibrary.a(serial.o)
- .debug_loc     0x0000bdb9      0x18c ../drivers\libIotLibrary.a(stdio_driver.o)
- .debug_loc     0x0000bf45      0x292 ../drivers\libIotLibrary.a(status_leds.o)
- .debug_loc     0x0000c1d7      0x575 ../drivers\libIotLibrary.a(twi.o)
- .debug_loc     0x0000c74c      0x15e ../drivers\libIotLibrary.a(fifo.o)
+ .debug_loc     0x00000000      0x1c0 Application.o
+ .debug_loc     0x000001c0       0xfc CO2Sensor.o
+ .debug_loc     0x000002bc      0x140 Configuration.o
+ .debug_loc     0x000003fc      0x133 DownLinkHandler.o
+ .debug_loc     0x0000052f      0xcc9 FreeRTOS/src/event_groups.o
+ .debug_loc     0x000011f8      0x4be FreeRTOS/src/heap_4.o
+ .debug_loc     0x000016b6      0x17d FreeRTOS/src/list.o
+ .debug_loc     0x00001833       0xf6 FreeRTOS/src/port.o
+ .debug_loc     0x00001929     0x1abd FreeRTOS/src/queue.o
+ .debug_loc     0x000033e6     0x1daf FreeRTOS/src/stream_buffer.o
+ .debug_loc     0x00005195     0x2a07 FreeRTOS/src/tasks.o
+ .debug_loc     0x00007b9c     0x10f3 FreeRTOS/src/timers.o
+ .debug_loc     0x00008c8f       0xdc FreeRTOS/src/variantHooks.o
+ .debug_loc     0x00008d6b      0x13d hih8120.o
+ .debug_loc     0x00008ea8       0x8e WindowController.o
+ .debug_loc     0x00008f36       0x22 main.o
+ .debug_loc     0x00008f58       0xd8 SensorDataPackageHandler.o
+ .debug_loc     0x00009030      0x3fd UpLinkHandler.o
+ .debug_loc     0x0000942d       0x9f ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_loc     0x000094cc     0x1216 ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_loc     0x0000a6e2      0x1d2 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_loc     0x0000a8b4      0x37c ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_loc     0x0000ac30       0x2f ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_loc     0x0000ac5f     0x114c ../drivers\libIotLibrary.a(serial.o)
+ .debug_loc     0x0000bdab      0x18c ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_loc     0x0000bf37      0x292 ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_loc     0x0000c1c9      0x575 ../drivers\libIotLibrary.a(twi.o)
+ .debug_loc     0x0000c73e      0x15e ../drivers\libIotLibrary.a(fifo.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -2240,7 +2249,7 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0xaa8
+.debug_ranges   0x00000000      0xac0
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x30 Application.o
  .debug_ranges  0x00000030       0x28 CO2Sensor.o
@@ -2256,19 +2265,20 @@ END GROUP
  .debug_ranges  0x000005b8       0xb8 FreeRTOS/src/timers.o
  .debug_ranges  0x00000670       0x30 FreeRTOS/src/variantHooks.o
  .debug_ranges  0x000006a0       0x30 hih8120.o
- .debug_ranges  0x000006d0       0x18 main.o
- .debug_ranges  0x000006e8       0x28 SensorDataPackageHandler.o
- .debug_ranges  0x00000710       0x20 UpLinkHandler.o
- .debug_ranges  0x00000730       0x58 ../drivers\libIotLibrary.a(hih8120.o)
- .debug_ranges  0x00000788      0x128 ../drivers\libIotLibrary.a(lora_driver.o)
- .debug_ranges  0x000008b0       0x30 ../drivers\libIotLibrary.a(lora_driver_utils.o)
- .debug_ranges  0x000008e0       0x48 ../drivers\libIotLibrary.a(mh_z19.o)
- .debug_ranges  0x00000928       0x18 ../drivers\libIotLibrary.a(rc_servo.o)
- .debug_ranges  0x00000940       0x98 ../drivers\libIotLibrary.a(serial.o)
- .debug_ranges  0x000009d8       0x28 ../drivers\libIotLibrary.a(stdio_driver.o)
- .debug_ranges  0x00000a00       0x58 ../drivers\libIotLibrary.a(status_leds.o)
- .debug_ranges  0x00000a58       0x40 ../drivers\libIotLibrary.a(twi.o)
- .debug_ranges  0x00000a98       0x10 ../drivers\libIotLibrary.a(fifo.o)
+ .debug_ranges  0x000006d0       0x18 WindowController.o
+ .debug_ranges  0x000006e8       0x18 main.o
+ .debug_ranges  0x00000700       0x28 SensorDataPackageHandler.o
+ .debug_ranges  0x00000728       0x20 UpLinkHandler.o
+ .debug_ranges  0x00000748       0x58 ../drivers\libIotLibrary.a(hih8120.o)
+ .debug_ranges  0x000007a0      0x128 ../drivers\libIotLibrary.a(lora_driver.o)
+ .debug_ranges  0x000008c8       0x30 ../drivers\libIotLibrary.a(lora_driver_utils.o)
+ .debug_ranges  0x000008f8       0x48 ../drivers\libIotLibrary.a(mh_z19.o)
+ .debug_ranges  0x00000940       0x18 ../drivers\libIotLibrary.a(rc_servo.o)
+ .debug_ranges  0x00000958       0x98 ../drivers\libIotLibrary.a(serial.o)
+ .debug_ranges  0x000009f0       0x28 ../drivers\libIotLibrary.a(stdio_driver.o)
+ .debug_ranges  0x00000a18       0x58 ../drivers\libIotLibrary.a(status_leds.o)
+ .debug_ranges  0x00000a70       0x40 ../drivers\libIotLibrary.a(twi.o)
+ .debug_ranges  0x00000ab0       0x10 ../drivers\libIotLibrary.a(fifo.o)
 
 .debug_macro
  *(.debug_macro)

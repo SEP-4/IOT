@@ -18,8 +18,8 @@
 void DownLinkHandler_lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _downlink_payload;
-int8_t windowDataSetting; // Windows Data setting
-uint8_t humDataSetting; // Humidifier Data setting
+int8_t windowDataSetting = 0; // Windows Data setting
+uint8_t humDataSetting = 0; // Humidifier Data setting
 MessageBufferHandle_t _downLinkMessageBufferHandle;
 
 
@@ -44,16 +44,15 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 	
 	for(;;)
 	{
-		printf("startLoraDownlinkTask\n");
+		printf("start LoraDownlink Task\n");
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-		printf("DOWN LINK: from port: %d with %d bytes received!", _downlink_payload.portNo, _downlink_payload.len); // Just for Debug
+		printf("DOWN LINK: from port: %d with %d bytes received!\n", _downlink_payload.portNo, _downlink_payload.len); // Just for Debug
 		if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
 		{
 			// decode the payload into our variables
 			humDataSetting  = (_downlink_payload.bytes[2]);
 			windowDataSetting = (_downlink_payload.bytes[3]);	
-			printf("%d : Window Setting \n%d : Humidity Setting",windowDataSetting,humDataSetting);
 			for(;;){
 				if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
 					configuration_set_windows_data(windowDataSetting);

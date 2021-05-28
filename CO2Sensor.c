@@ -35,7 +35,6 @@ void CO2Sensor_handler_initialise(UBaseType_t CO2_task_priority){
 
 void CO2Sensor_handler_task(void *pvParameters)
 {
-	printf("startCO2");
 	(void)pvParameters;
 	mh_z19_injectCallBack(NULL);
 	

@@ -53,7 +53,7 @@ const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
   if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
   {
       /* xEventGroupWaitBits() returned because both bits were set. */
-	  printf("setting the bits, they are set");
+	  printf("setting the bits, they are set \n");
 	  SensorDataPackageHandler_SetHumidity(hih820_getHumidityInUint16());
 	  SensorDataPackageHandler_SetTemperature(hih820_getTemperatureInUint16());
 	  SensorDataPackageHandler_SetCO2(CO2Sensor_getCO2InUint16());
@@ -121,7 +121,7 @@ void Application_handler_initialise(UBaseType_t Application_task_priority){
 
 void Application_handler_task(void *pvParameters)
 {
-	printf("startApplication");
+	printf("startApplication \n");
 	(void)pvParameters;
 	xCreatedEventGroup = xEventGroupCreate();
 	

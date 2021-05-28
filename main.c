@@ -24,6 +24,7 @@
 #include <message_buffer.h>
 #include <mh_z19.h>
 #include "CO2Sensor.h"
+#include "WindowController.h"
 
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
@@ -82,6 +83,8 @@ int main(void)
 	UpLinkHandler_lora_handler_initialise(2);
 	//Create LoRaWAN task and start with priority 1
 	DownLinkHandler_lora_handler_initialise(1,downLinkMessageBufferHandle);
+	//Create windowController and start it up with priority 3
+	WindowController_handler_initialise(1);
 	
 	printf("Program Started!!\n");
 	vTaskStartScheduler(); // Initialize and run the freeRTOS scheduler. Execution should never return from here.

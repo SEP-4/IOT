@@ -36,7 +36,6 @@ void hih8120_handler_initialise(UBaseType_t hih8120_task_priority){
 
 void hih820_handler_task(void *pvParameters)
 {
-	printf("start1");
 	(void)pvParameters;
 	
 	TickType_t xLastWakeTime;
@@ -46,18 +45,14 @@ void hih820_handler_task(void *pvParameters)
 	for(;;)
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		printf("start2");
 		if (HIH8120_OK == hih8120_wakeup())
 		{
-			printf("start4");
 			vTaskDelay(50);
 			if (HIH8120_OK == hih8120_measure())
 			{
-				printf("start5");
 				vTaskDelay(1);
 				humidityIn16 = hih8120_getHumidityPercent_x10();
 				temperatureIn16 = hih8120_getTemperature_x10();
-				printf("Arrived here");
 				hih820_aFunctionToSetBits(Application_getEventGroup());
 			}
 		}

@@ -9,6 +9,7 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <rc_servo.h>
 #include "Configuration.h"
+#include "WindowController.h"
 
 int8_t percent = 0;
 SemaphoreHandle_t semaphore_mutex = NULL;
@@ -37,6 +38,7 @@ void WindowController_handler_task(void *pvParameters)
 	{
 		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
 			rc_servo_setPosition(0, configuration_get_windows_data());
+			percent = configuration_get_windows_data();
 			xSemaphoreGive(semaphore_mutex);
 		}
 	}
