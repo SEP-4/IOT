@@ -22,7 +22,9 @@ static char _out_buf[100];
 
 void UpLinkHandler_lora_handler_task( void *pvParameters );
 
+TickType_t xLastWakeTime;
 static lora_driver_payload_t _uplink_payload;
+const TickType_t xFrequency_Up = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 
 
 void UpLinkHandler_lora_handler_initialise(UBaseType_t UpLinkHandler_lora_handler_task_priority)
@@ -108,9 +110,7 @@ static void _lora_setup(void)
 	}
 }
 
-/*-----------------------------------------------------------*/
-void UpLinkHandler_lora_handler_task( void *pvParameters )
-{
+inline static void UpLinkHandler_init(){
 	// Hardware reset of LoRaWAN transceiver
 	lora_driver_resetRn2483(1);
 	vTaskDelay(2);
@@ -122,18 +122,23 @@ void UpLinkHandler_lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-
-	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
-	
-	
-	for(;;)
-	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		printf("startLoraTask");
+}
+
+inline static void UpLinkHandler_run(void){
+		xTaskDelayUntil( &xLastWakeTime, xFrequency_Up );
+		printf("startLoraTask\n");
 		_uplink_payload = SensorDataPackageHandler_getLoRaPayload();
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+}
+
+/*-----------------------------------------------------------*/
+void UpLinkHandler_lora_handler_task( void *pvParameters )
+{	
+	UpLinkHandler_init();
+	for(;;)
+	{
+		UpLinkHandler_run();
 	}
 }

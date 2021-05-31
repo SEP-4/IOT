@@ -25,8 +25,8 @@
 #include "CO2Sensor.h"
 #include "SensorDataPackageHandler.h"
 
-#define BIT_0	( 1 << 0 )
-#define BIT_4	( 1 << 4 )
+#define CO2_READY_BIT	( 1 << 0 )
+#define TEMP_HUM_READY_BIT	( 1 << 4 )
 
 
 // Declare a variable to hold the created event group.
@@ -45,12 +45,12 @@ const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
   the event group.  Clear the bits before exiting. */
   uxBits = xEventGroupWaitBits(
             xEventGroup,   /* The event group being tested. */
-            BIT_0 | BIT_4, /* The bits within the event group to wait for. */
+            CO2_READY_BIT | TEMP_HUM_READY_BIT, /* The bits within the event group to wait for. */
             pdFALSE,        /* BIT_0 & BIT_4 should not be cleared before returning. */
             pdTRUE,       /* Wait for both bits, either bit will do. */
             xTicksToWait );/* Wait a maximum of 100ms for either bit to be set. */
 
-  if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+  if( ( uxBits & ( CO2_READY_BIT | TEMP_HUM_READY_BIT ) ) == ( CO2_READY_BIT | TEMP_HUM_READY_BIT ) )
   {
       /* xEventGroupWaitBits() returned because both bits were set. */
 	  printf("setting the bits, they are set \n");
@@ -59,11 +59,11 @@ const TickType_t xTicksToWait = 100 / portTICK_PERIOD_MS;
 	  SensorDataPackageHandler_SetCO2(CO2Sensor_getCO2InUint16());
 	  Application_aFunctionToClearBits( xEventGroup );
   }
-  else if( ( uxBits & BIT_0 ) != 0 )
+  else if( ( uxBits & CO2_READY_BIT ) != 0 )
   {
       /* xEventGroupWaitBits() returned because just BIT_0 was set. */
   }
-  else if( ( uxBits & BIT_4 ) != 0 )
+  else if( ( uxBits & TEMP_HUM_READY_BIT ) != 0 )
   {
       /* xEventGroupWaitBits() returned because just BIT_4 was set. */
   }
@@ -81,19 +81,19 @@ EventBits_t uxBits;
   /* Clear bit 0 and bit 4 in xEventGroup. */
   uxBits = xEventGroupClearBits(
                                 xEventGroup,  /* The event group being updated. */
-                                BIT_0 | BIT_4 );/* The bits being cleared. */
+                                CO2_READY_BIT | TEMP_HUM_READY_BIT );/* The bits being cleared. */
 
-  if( ( uxBits & ( BIT_0 | BIT_4 ) ) == ( BIT_0 | BIT_4 ) )
+  if( ( uxBits & ( CO2_READY_BIT | TEMP_HUM_READY_BIT ) ) == ( CO2_READY_BIT | TEMP_HUM_READY_BIT ) )
   {
       /* Both bit 0 and bit 4 were set before xEventGroupClearBits()
       was called.  Both will now be clear (not set). */
   }
-  else if( ( uxBits & BIT_0 ) != 0 )
+  else if( ( uxBits & CO2_READY_BIT ) != 0 )
   {
       /* Bit 0 was set before xEventGroupClearBits() was called.  It will
       now be clear. */
   }
-  else if( ( uxBits & BIT_4 ) != 0 )
+  else if( ( uxBits & TEMP_HUM_READY_BIT ) != 0 )
   {
       /* Bit 4 was set before xEventGroupClearBits() was called.  It will
       now be clear. */

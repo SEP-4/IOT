@@ -2,7 +2,7 @@
  * WindowController.c
  *
  * Created: 05/05/2021 22.48.28
- *  Author: maria
+ *  Author: Jannik
  */ 
 #include <stddef.h>
 #include <stdio.h>
@@ -27,19 +27,26 @@ void WindowController_handler_initialise(UBaseType_t WindowController_task_prior
 	,  NULL );
 }
 
-void WindowController_handler_task(void *pvParameters)
-{
+inline void WindowController_init(void *pvParameters){
 	printf("startWindowController \n");
 	(void)pvParameters;
 	semaphore_mutex = get_mutex();
 	xSemaphoreGive(semaphore_mutex);
-	
+}
+
+inline void WindowController_run(){
+	if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
+		rc_servo_setPosition(0, configuration_get_windows_data());
+		percent = configuration_get_windows_data();
+		xSemaphoreGive(semaphore_mutex);
+	}
+}
+
+void WindowController_handler_task(void *pvParameters)
+{
+	WindowController_init(pvParameters);
 	for(;;)
 	{
-		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
-			rc_servo_setPosition(0, configuration_get_windows_data());
-			percent = configuration_get_windows_data();
-			xSemaphoreGive(semaphore_mutex);
-		}
+		WindowController_run();	
 	}
 }

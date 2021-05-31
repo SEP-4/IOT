@@ -17,6 +17,8 @@
 
 uint16_t humidityIn16 = 0;
 int16_t temperatureIn16 = 0;
+TickType_t xLastWakeTime;
+const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 
 
 void hih820_handler_task( void *pvParameters );
@@ -34,28 +36,32 @@ void hih8120_handler_initialise(UBaseType_t hih8120_task_priority){
 	,  NULL );
 }
 
+inline void hih8120_init(void *pvParameters){
+	(void)pvParameters;
+	xLastWakeTime = xTaskGetTickCount();
+}
+
+inline void hih8120_run(void){
+	xTaskDelayUntil( &xLastWakeTime, xFrequency );
+	if (HIH8120_OK == hih8120_wakeup())
+	{
+		vTaskDelay(50);
+		if (HIH8120_OK == hih8120_measure())
+		{
+			vTaskDelay(1);
+			humidityIn16 = hih8120_getHumidityPercent_x10();
+			temperatureIn16 = hih8120_getTemperature_x10();
+			hih820_aFunctionToSetBits(Application_getEventGroup());
+		}
+	}
+}
+
 void hih820_handler_task(void *pvParameters)
 {
-	(void)pvParameters;
-	
-	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
-	xLastWakeTime = xTaskGetTickCount();
-	
+	hih8120_init(pvParameters);
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		if (HIH8120_OK == hih8120_wakeup())
-		{
-			vTaskDelay(50);
-			if (HIH8120_OK == hih8120_measure())
-			{
-				vTaskDelay(1);
-				humidityIn16 = hih8120_getHumidityPercent_x10();
-				temperatureIn16 = hih8120_getTemperature_x10();
-				hih820_aFunctionToSetBits(Application_getEventGroup());
-			}
-		}
+		hih8120_run();
 	}
 }
 
@@ -67,7 +73,7 @@ int16_t hih820_getTemperatureInUint16(){
 	return temperatureIn16/10;
 }
 
-#define BIT_4	( 1 << 4 )
+#define TEMP_HUM_READY_BIT	( 1 << 4 )
 
 void hih820_aFunctionToSetBits( EventGroupHandle_t xEventGroup )
 {
@@ -76,9 +82,9 @@ EventBits_t uxBits;
   /* Set bit 0 and bit 4 in xEventGroup. */
   uxBits = xEventGroupSetBits(
                               xEventGroup,    /* The event group being updated. */
-                              BIT_4 );/* The bits being set. */
+                              TEMP_HUM_READY_BIT );/* The bits being set. */
 
-  if( ( uxBits & (  BIT_4 ) ) == (  BIT_4 ) )
+  if( ( uxBits & (  TEMP_HUM_READY_BIT ) ) == (  TEMP_HUM_READY_BIT ) )
   {
       /* bit 4 remained set when the function returned. */
   }
