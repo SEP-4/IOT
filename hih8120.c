@@ -57,11 +57,40 @@ inline void hih8120_run(void){
 }
 
 void hih820_handler_task(void *pvParameters)
+<<<<<<< HEAD
 {
 	hih8120_init(pvParameters);
 	for(;;)
 	{
 		hih8120_run();
+=======
+{
+	printf("start1");
+	(void)pvParameters;
+	
+	TickType_t xLastWakeTime;
+	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
+	xLastWakeTime = xTaskGetTickCount();
+	
+	for(;;)
+	{
+		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+		printf("start2");
+		if (HIH8120_OK == hih8120_wakeup())
+		{
+			printf("start4");
+			vTaskDelay(50);
+			if (HIH8120_OK == hih8120_measure())
+			{
+				printf("start5");
+				vTaskDelay(1);
+				humidityIn16 = hih8120_getHumidityPercent_x10();
+				temperatureIn16 = hih8120_getTemperature_x10();
+				printf("Arrived here");
+				hih820_aFunctionToSetBits(Application_getEventGroup());
+			}
+		}
+>>>>>>> parent of fbcb7fb (Fully functionally WindowsController)
 	}
 }
 

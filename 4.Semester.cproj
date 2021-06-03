@@ -347,9 +347,6 @@
     <Compile Include="UpLinkHandler.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="WindowController.h">
-      <SubType>compile</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="drivers\" />

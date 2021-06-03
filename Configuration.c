@@ -39,7 +39,7 @@ uint8_t configuration_get_windows_data(){
 }
 
 void configuration_set_windows_data(uint8_t value){
-	printf("Setting windows to: %d\n",value);
+	printf("%d : set windows value \n",value);
 	if(value == 0){
 		windows_settings = -100;
 	}else{
@@ -52,7 +52,7 @@ uint8_t configuration_get_humidity_data(){
 }
 
 void configuration_set_humidity_data(uint8_t value){
-	printf("Setting humidity data to: %d\n",value);
+	printf("%d : set Humidity value \n",value);
 	if(value == 0){
 		humidity_setting = -100;
 	}else{

@@ -34,7 +34,13 @@ void CO2Sensor_handler_initialise(UBaseType_t CO2_task_priority){
 	,  NULL );
 }
 
+<<<<<<< HEAD
 inline void CO2Sensor_init(void *pvParameters){
+=======
+void CO2Sensor_handler_task(void *pvParameters)
+{
+	printf("startCO2");
+>>>>>>> parent of fbcb7fb (Fully functionally WindowsController)
 	(void)pvParameters;
 	mh_z19_injectCallBack(NULL);
 	xLastWakeTime = xTaskGetTickCount();
