@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000bb8  00000000  00000000  000075dc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000e38b  00000000  00000000  00008194  2**0
+  6 .debug_info   0000e388  00000000  00000000  00008194  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00003b44  00000000  00000000  0001651f  2**0
+  7 .debug_abbrev 00003b53  00000000  00000000  0001651c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000070cc  00000000  00000000  0001a063  2**0
+  8 .debug_line   000070c6  00000000  00000000  0001a06f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00002910  00000000  00000000  00021130  2**2
+  9 .debug_frame  00002910  00000000  00000000  00021138  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00004619  00000000  00000000  00023a40  2**0
+ 10 .debug_str    00004619  00000000  00000000  00023a48  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000c8ba  00000000  00000000  00028059  2**0
+ 11 .debug_loc    0000c8e2  00000000  00000000  00028061  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000ac8  00000000  00000000  00034913  2**0
+ 12 .debug_ranges 00000ac8  00000000  00000000  00034943  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -754,7 +754,7 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
      54c:	b8 df       	rcall	.-144    	; 0x4be <configuration_create>
 	SemaphoreHandle_t semaphore_mutex = get_mutex();
      54e:	f9 df       	rcall	.-14     	; 0x542 <get_mutex>
-     550:	7c 01       	movw	r14, r24
+     550:	ec 01       	movw	r28, r24
      552:	00 e0       	ldi	r16, 0x00	; 0
 	xSemaphoreGive(semaphore_mutex);
      554:	20 e0       	ldi	r18, 0x00	; 0
@@ -773,77 +773,77 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
      568:	83 e0       	ldi	r24, 0x03	; 3
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
      56a:	0e 94 02 2c 	call	0x5804	; 0x5804 <status_leds_shortPuls>
-     56e:	0f ef       	ldi	r16, 0xFF	; 255
-		xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-     570:	1f ef       	ldi	r17, 0xFF	; 255
-     572:	98 01       	movw	r18, r16
-     574:	46 e1       	ldi	r20, 0x16	; 22
-     576:	50 e0       	ldi	r21, 0x00	; 0
-     578:	66 e6       	ldi	r22, 0x66	; 102
-     57a:	78 e0       	ldi	r23, 0x08	; 8
-     57c:	80 91 c7 17 	lds	r24, 0x17C7	; 0x8017c7 <_downLinkMessageBufferHandle>
-     580:	90 91 c8 17 	lds	r25, 0x17C8	; 0x8017c8 <_downLinkMessageBufferHandle+0x1>
-     584:	0e 94 c2 0d 	call	0x1b84	; 0x1b84 <xStreamBufferReceive>
-     588:	c6 e6       	ldi	r28, 0x66	; 102
-		printf("DOWN LINK: from port: %d with %d bytes received!\n", _downlink_payload.portNo, _downlink_payload.len); // Just for Debug
-     58a:	d8 e0       	ldi	r29, 0x08	; 8
-     58c:	99 81       	ldd	r25, Y+1	; 0x01
-     58e:	88 81       	ld	r24, Y
-     590:	1f 92       	push	r1
-     592:	9f 93       	push	r25
-     594:	1f 92       	push	r1
-     596:	8f 93       	push	r24
-     598:	83 e2       	ldi	r24, 0x23	; 35
-     59a:	93 e0       	ldi	r25, 0x03	; 3
-     59c:	9f 93       	push	r25
-     59e:	8f 93       	push	r24
-     5a0:	0e 94 54 36 	call	0x6ca8	; 0x6ca8 <printf>
-     5a4:	89 81       	ldd	r24, Y+1	; 0x01
-		if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
-     5a6:	0f 90       	pop	r0
-     5a8:	0f 90       	pop	r0
-     5aa:	0f 90       	pop	r0
-     5ac:	0f 90       	pop	r0
-     5ae:	0f 90       	pop	r0
-     5b0:	0f 90       	pop	r0
-     5b2:	84 30       	cpi	r24, 0x04	; 4
-     5b4:	a9 f6       	brne	.-86     	; 0x560 <DownLinkHandler_lora_handler_task+0x14>
-     5b6:	8c 81       	ldd	r24, Y+4	; 0x04
-		{
-			// decode the payload into our variables
-			humDataSetting  = (_downlink_payload.bytes[2]);
-     5b8:	80 93 64 08 	sts	0x0864, r24	; 0x800864 <humDataSetting>
-     5bc:	8d 81       	ldd	r24, Y+5	; 0x05
-			windowDataSetting = (_downlink_payload.bytes[3]);	
-     5be:	80 93 65 08 	sts	0x0865, r24	; 0x800865 <windowDataSetting>
-     5c2:	4f ef       	ldi	r20, 0xFF	; 255
-			for(;;){
-				if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
-     5c4:	5f ef       	ldi	r21, 0xFF	; 255
-     5c6:	ba 01       	movw	r22, r20
-     5c8:	c7 01       	movw	r24, r14
-     5ca:	61 d7       	rcall	.+3778   	; 0x148e <xQueueSemaphoreTake>
-     5cc:	88 23       	and	r24, r24
-     5ce:	c9 f3       	breq	.-14     	; 0x5c2 <DownLinkHandler_lora_handler_task+0x76>
-					configuration_set_windows_data(windowDataSetting);
-     5d0:	80 91 65 08 	lds	r24, 0x0865	; 0x800865 <windowDataSetting>
+     56e:	4f ef       	ldi	r20, 0xFF	; 255
+		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
+     570:	5f ef       	ldi	r21, 0xFF	; 255
+     572:	ba 01       	movw	r22, r20
+     574:	ce 01       	movw	r24, r28
+     576:	8b d7       	rcall	.+3862   	; 0x148e <xQueueSemaphoreTake>
+     578:	88 23       	and	r24, r24
+     57a:	91 f3       	breq	.-28     	; 0x560 <DownLinkHandler_lora_handler_task+0x14>
+     57c:	0f ef       	ldi	r16, 0xFF	; 255
+			xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
+     57e:	1f ef       	ldi	r17, 0xFF	; 255
+     580:	98 01       	movw	r18, r16
+     582:	46 e1       	ldi	r20, 0x16	; 22
+     584:	50 e0       	ldi	r21, 0x00	; 0
+     586:	66 e6       	ldi	r22, 0x66	; 102
+     588:	78 e0       	ldi	r23, 0x08	; 8
+     58a:	80 91 c7 17 	lds	r24, 0x17C7	; 0x8017c7 <_downLinkMessageBufferHandle>
+     58e:	90 91 c8 17 	lds	r25, 0x17C8	; 0x8017c8 <_downLinkMessageBufferHandle+0x1>
+     592:	0e 94 c2 0d 	call	0x1b84	; 0x1b84 <xStreamBufferReceive>
+     596:	06 e6       	ldi	r16, 0x66	; 102
+			printf("DOWN LINK: from port: %d with %d bytes received!\n", _downlink_payload.portNo, _downlink_payload.len); // Just for Debug
+     598:	18 e0       	ldi	r17, 0x08	; 8
+     59a:	f8 01       	movw	r30, r16
+     59c:	91 81       	ldd	r25, Z+1	; 0x01
+     59e:	80 81       	ld	r24, Z
+     5a0:	1f 92       	push	r1
+     5a2:	9f 93       	push	r25
+     5a4:	1f 92       	push	r1
+     5a6:	8f 93       	push	r24
+     5a8:	83 e2       	ldi	r24, 0x23	; 35
+     5aa:	93 e0       	ldi	r25, 0x03	; 3
+     5ac:	9f 93       	push	r25
+     5ae:	8f 93       	push	r24
+     5b0:	0e 94 54 36 	call	0x6ca8	; 0x6ca8 <printf>
+     5b4:	f8 01       	movw	r30, r16
+			if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
+     5b6:	81 81       	ldd	r24, Z+1	; 0x01
+     5b8:	0f 90       	pop	r0
+     5ba:	0f 90       	pop	r0
+     5bc:	0f 90       	pop	r0
+     5be:	0f 90       	pop	r0
+     5c0:	0f 90       	pop	r0
+     5c2:	0f 90       	pop	r0
+     5c4:	84 30       	cpi	r24, 0x04	; 4
+     5c6:	51 f4       	brne	.+20     	; 0x5dc <DownLinkHandler_lora_handler_task+0x90>
+     5c8:	84 81       	ldd	r24, Z+4	; 0x04
+			{
+				// decode the payload into our variables
+				humDataSetting  = (_downlink_payload.bytes[2]);
+     5ca:	80 93 64 08 	sts	0x0864, r24	; 0x800864 <humDataSetting>
+				windowDataSetting = (_downlink_payload.bytes[3]);	
+     5ce:	85 81       	ldd	r24, Z+5	; 0x05
+     5d0:	80 93 65 08 	sts	0x0865, r24	; 0x800865 <windowDataSetting>
+				configuration_set_windows_data(windowDataSetting);
      5d4:	84 df       	rcall	.-248    	; 0x4de <configuration_set_windows_data>
-					configuration_set_humidity_data(humDataSetting);
+				configuration_set_humidity_data(humDataSetting);
      5d6:	80 91 64 08 	lds	r24, 0x0864	; 0x800864 <humDataSetting>
      5da:	9a df       	rcall	.-204    	; 0x510 <configuration_set_humidity_data>
      5dc:	00 e0       	ldi	r16, 0x00	; 0
-					xSemaphoreGive(semaphore_mutex);
+			}
+		xSemaphoreGive(semaphore_mutex);	
      5de:	20 e0       	ldi	r18, 0x00	; 0
      5e0:	30 e0       	ldi	r19, 0x00	; 0
      5e2:	a9 01       	movw	r20, r18
      5e4:	60 e0       	ldi	r22, 0x00	; 0
      5e6:	70 e0       	ldi	r23, 0x00	; 0
-     5e8:	c7 01       	movw	r24, r14
+     5e8:	ce 01       	movw	r24, r28
      5ea:	d7 d5       	rcall	.+2990   	; 0x119a <xQueueGenericSend>
      5ec:	b9 cf       	rjmp	.-142    	; 0x560 <DownLinkHandler_lora_handler_task+0x14>
 
 000005ee <DownLinkHandler_lora_handler_initialise>:
-					break;
      5ee:	ef 92       	push	r14
 MessageBufferHandle_t _downLinkMessageBufferHandle;
 
