@@ -40,24 +40,10 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 {
 	configuration_create();
 	SemaphoreHandle_t semaphore_mutex = get_mutex();
-	xSemaphoreGive(semaphore_mutex);
-	
 	for(;;)
 	{
 		printf("startLoraDownlinkTask\n");
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
-<<<<<<< HEAD
-		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
-			xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-			printf("DOWN LINK: from port: %d with %d bytes received!\n", _downlink_payload.portNo, _downlink_payload.len); // Just for Debug
-			if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
-			{
-				// decode the payload into our variables
-				humDataSetting  = (_downlink_payload.bytes[2]);
-				windowDataSetting = (_downlink_payload.bytes[3]);	
-				configuration_set_windows_data(windowDataSetting);
-				configuration_set_humidity_data(humDataSetting);
-=======
 		xMessageBufferReceive(_downLinkMessageBufferHandle, &_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 		printf("DOWN LINK: from port: %d with %d bytes received!", _downlink_payload.portNo, _downlink_payload.len); // Just for Debug
 		if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
@@ -65,17 +51,10 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 			// decode the payload into our variables
 			humDataSetting  = (_downlink_payload.bytes[2]);
 			windowDataSetting = (_downlink_payload.bytes[3]);	
-			printf("%d : Window Setting \n%d : Humidity Setting",windowDataSetting,humDataSetting);
-			for(;;){
-				if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
-					configuration_set_windows_data(windowDataSetting);
-					configuration_set_humidity_data(humDataSetting);
-					xSemaphoreGive(semaphore_mutex);
-					break;
-				}
->>>>>>> parent of fbcb7fb (Fully functionally WindowsController)
-			}
-		xSemaphoreGive(semaphore_mutex);	
+			configuration_set_windows_data(windowDataSetting);
+			configuration_set_humidity_data(humDataSetting);
+			printf("%d : Window Setting \n%d : Humidity Setting",windowDataSetting,humDataSetting);	
 		}
+		xSemaphoreGive(semaphore_mutex);
 	}
 }

@@ -28,6 +28,9 @@
 // define semaphore handle
 SemaphoreHandle_t xTestSemaphore;
 
+// define semaphore handle
+SemaphoreHandle_t xTestSemaphore;
+
 MessageBufferHandle_t downLinkMessageBufferHandle;
 
 // Prototype for LoRaWAN handler without down link buffer

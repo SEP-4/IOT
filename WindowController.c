@@ -26,30 +26,26 @@ void WindowController_handler_initialise(UBaseType_t WindowController_task_prior
 	,  NULL );
 }
 
-void WindowController_handler_task(void *pvParameters)
-{
-	printf("startWindowController \n");
+void WindowController_init(void *pvParameters){
 	(void)pvParameters;
 	semaphore_mutex = get_mutex();
 	xSemaphoreGive(semaphore_mutex);
+}
+
+void WindowController_run(){
+	if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
+		rc_servo_setPosition(0, configuration_get_windows_data());
+		percent = configuration_get_windows_data();
+		xSemaphoreGive(semaphore_mutex);
+	}
+}
+
+void WindowController_handler_task(void *pvParameters)
+{
+	printf("startWindowController \n");
 	
 	for(;;)
 	{
-<<<<<<< HEAD
-<<<<<<< HEAD
 		WindowController_run();	
-=======
-		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
-			rc_servo_setPosition(0, configuration_get_windows_data());
-			xSemaphoreGive(semaphore_mutex);
-		}
->>>>>>> parent of fbcb7fb (Fully functionally WindowsController)
-=======
-		if(xSemaphoreTake(semaphore_mutex, portMAX_DELAY)){
-			rc_servo_setPosition(0, configuration_get_windows_data());
-			percent = configuration_get_windows_data();
-			xSemaphoreGive(semaphore_mutex);
-		}
->>>>>>> parent of 47cce05 (Changing Semaphore)
 	}
 }

@@ -32,19 +32,8 @@ void CO2Sensor_handler_initialise(UBaseType_t CO2_task_priority){
 	,  CO2_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-inline void CO2Sensor_init(void *pvParameters){
-=======
 void CO2Sensor_handler_task(void *pvParameters)
 {
-	printf("startCO2");
->>>>>>> parent of fbcb7fb (Fully functionally WindowsController)
-=======
-void CO2Sensor_handler_task(void *pvParameters)
-{
->>>>>>> parent of 47cce05 (Changing Semaphore)
 	(void)pvParameters;
 	mh_z19_injectCallBack(NULL);
 	
