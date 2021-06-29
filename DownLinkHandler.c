@@ -49,12 +49,13 @@ void DownLinkHandler_lora_handler_task( void *pvParameters )
 		if (4 == _downlink_payload.len) // Check that we have got the expected 4 bytes
 		{
 			// decode the payload into our variables
+			xSemaphoreTake(semaphore_mutex, portMAX_DELAY);
 			humDataSetting  = (_downlink_payload.bytes[2]);
 			windowDataSetting = (_downlink_payload.bytes[3]);	
 			configuration_set_windows_data(windowDataSetting);
 			configuration_set_humidity_data(humDataSetting);
 			printf("%d : Window Setting \n%d : Humidity Setting",windowDataSetting,humDataSetting);	
+			xSemaphoreGive(semaphore_mutex);
 		}
-		xSemaphoreGive(semaphore_mutex);
 	}
 }

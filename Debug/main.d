@@ -27,7 +27,7 @@ main.d main.o: .././main.c \
  ../drivers/status_leds.h .././Application.h \
  ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
  ../drivers/hih8120.h .././hih8120_2.h ../drivers/rc_servo.h \
- ../drivers/mh_z19.h .././CO2Sensor.h
+ ../drivers/mh_z19.h .././CO2Sensor.h .././WindowController.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -114,3 +114,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../drivers/mh_z19.h:
 
 .././CO2Sensor.h:
+
+.././WindowController.h:

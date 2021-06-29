@@ -30,7 +30,7 @@ void configuration_create(){
 	// Semaphores should only be used whilst the scheduler is running, but we can set it up here.
 	if ( _configurationSemaphore  == NULL )  // Check to confirm that the Semaphore has not already been created.
 	{
-		_configurationSemaphore = xSemaphoreCreateBinary();  // Create a binary Mutex semaphore.
+		_configurationSemaphore = xSemaphoreCreateMutex();  // Create a binary Mutex semaphore.
 		if ( ( _configurationSemaphore  ) != NULL )
 		{
 			xSemaphoreGive( ( _configurationSemaphore  ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.

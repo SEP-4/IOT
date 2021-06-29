@@ -65,7 +65,7 @@ uint16_t CO2Sensor_getCO2InUint16(){
 }
 
 
-#define BIT_0	( 1 << 0 )
+#define CO2_READY_BIT	( 1 << 0 )
 
 void CO2Sensor_aFunctionToSetBits( EventGroupHandle_t xEventGroup )
 {
@@ -74,9 +74,9 @@ EventBits_t uxBits;
   /* Set bit 0  in xEventGroup. */
   uxBits = xEventGroupSetBits(
                               xEventGroup,    /* The event group being updated. */
-                              BIT_0  );/* The bits being set. */
+                              CO2_READY_BIT  );/* The bits being set. */
 
-  if( ( uxBits & ( BIT_0  ) ) == ( BIT_0 ) )
+  if( ( uxBits & ( CO2_READY_BIT  ) ) == ( CO2_READY_BIT ) )
   {
       /* bit 0 remained set when the function returned. */
   }

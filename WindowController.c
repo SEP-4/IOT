@@ -26,8 +26,7 @@ void WindowController_handler_initialise(UBaseType_t WindowController_task_prior
 	,  NULL );
 }
 
-void WindowController_init(void *pvParameters){
-	(void)pvParameters;
+void WindowController_init(){
 	semaphore_mutex = get_mutex();
 	xSemaphoreGive(semaphore_mutex);
 }
@@ -43,7 +42,8 @@ void WindowController_run(){
 void WindowController_handler_task(void *pvParameters)
 {
 	printf("startWindowController \n");
-	
+	(void)pvParameters;
+	WindowController_init();
 	for(;;)
 	{
 		WindowController_run();	
